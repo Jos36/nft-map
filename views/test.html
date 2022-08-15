@@ -1,0 +1,307 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <title>Metabitz</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      canvas {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: absolute;
+      }
+
+      body {
+        background-color: #505861;
+        overflow: hidden;
+      }
+
+      .btns {
+        position: relative;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> METABITZ (Admin Panel) </a>
+        <a href="#" class="btn btn-danger" onclick="logout(event)">Logout</a>
+      </div>
+    </nav>
+    <br /><br /><br />
+
+    <div class="d-flex justify-content-center position-relative gap-2">
+      <button class="btns btn btn-primary rounded p-3" onmousedown="zoomIn()">
+        <i class="fa-solid fa-lg fa-magnifying-glass-plus"></i>
+      </button>
+      <button class="btns btn btn-light rounded p-3" onmousedown="zoomOut()">
+        <i class="fa-solid fa-lg fa-magnifying-glass-minus"></i>
+      </button>
+      <div class="p-2"></div>
+      <button class="btns btn btn-light rounded p-3" onmousedown="up()">
+        <i class="fa-solid fa-circle-arrow-up fa-lg"></i>
+      </button>
+      <button class="btns btn btn-light rounded p-3" onmousedown="down()">
+        <i class="fa-solid fa-circle-arrow-down fa-lg"></i>
+      </button>
+      <button class="btns btn btn-light rounded p-3" onmousedown="left()">
+        <i class="fa-solid fa-circle-arrow-left fa-lg"></i>
+      </button>
+      <button class="btns btn btn-light rounded p-3" onmousedown="right()">
+        <i class="fa-solid fa-circle-right fa-lg"></i>
+      </button>
+    </div>
+    <canvas id="myCanvas"></canvas>
+
+    <div id="myNav" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
+      <div class="overlay-content p-2">
+        <div class="container-fluid">
+          <div class="">
+            <div
+              id="carouselExampleIndicators"
+              class="mt-2 carousel slide m-0"
+              style="height: 40%"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators" id="indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
+                  class="fixed-bottom active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+              </div>
+              <div class="carousel-inner text-center" id="slides"></div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <div class="col">
+              <div class="m-0 mt-2 blockquote" style="color: greenyellow">
+                <i class="fa-solid fa-location-dot text-danger"></i>
+                <small id="com_location"></small>
+              </div>
+              <h4 class="text-white mt-0 text-break" id="com_name"></h4>
+              <span>
+                <h6 class="mt-3 text-light">
+                  <i class="fa-solid fa-pen-to-square"></i
+                  ><span class="text-decoration-none"> Description</span>
+                </h6>
+                <small
+                  class="text-white"
+                  style="text-justify: auto; text-align: justify"
+                  id="com_description"
+                >
+                </small
+                ><br /><br />
+                <h6 class="text-white text-decoration-underline">Links</h6>
+                <small class="text-primary" id="com_links"></small><br />
+              </span>
+            </div>
+            <div class="col text-white">
+              <h5>Videos</h5>
+              <video
+                id="com_video"
+                src="./assets/video.mp4"
+                style="width: 350px; height: fit-content"
+                controls
+                autoplay="true"
+              ></video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="addModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="13213"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Company</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form onsubmit="add(event)" method="post">
+              <div class="mb-2">
+                <label for="" class="form-label">Coordinates</label>
+                <div class="d-flex align-items-center col-5 gap-2">
+                  <span>X</span>
+                  <input
+                    disabled
+                    type="text"
+                    name="coordinateX"
+                    class="form-control form-control-sm"
+                    id="coordinateX"
+                  />
+                  <span>Y</span>
+                  <input
+                    disabled
+                    type="text"
+                    name="coordinateY"
+                    class="form-control form-control-sm"
+                    id="coordinateY"
+                  />
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Name</label>
+                <input
+                  type="text"
+                  required
+                  name="name"
+                  class="form-control form-control-sm"
+                  id="name"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Description</label>
+                <input
+                  type="text"
+                  required
+                  name="description"
+                  class="form-control form-control-sm"
+                  id="desc"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Logo</label>
+                <input
+                  type="file"
+                  required
+                  name="logo"
+                  class="form-control form-control-sm"
+                  id="logo"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label"
+                  >Images <small>(You can choose multiple images)</small></label
+                >
+                <input
+                  type="file"
+                  multiple
+                  required
+                  name="images"
+                  class="form-control form-control-sm"
+                  id="images"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label"
+                  >Video <small>(You can upload multiple videos)</small></label
+                >
+                <input
+                  type="file"
+                  name="videos"
+                  class="form-control form-control-sm"
+                  id="videos"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label"
+                  >Videos links <br />
+                  <small
+                    >(e.g : http://www.youtube.com/2423,
+                    http://www.xyz.com/s423)</small
+                  ></label
+                >
+                <input
+                  type="text"
+                  name="links"
+                  class="form-control form-control-sm"
+                  id="links"
+                />
+              </div>
+              <input
+                type="submit"
+                value="Add"
+                class="btn btn-primary float-lg-end"
+              />
+            </form>
+          </div>
+          <div class="modal-footer m-0 p-0">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./test.js"></script>
+    <script src="./api.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
