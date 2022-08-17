@@ -47,14 +47,22 @@ function grid() {
         landInfo.classList.add("hidden");
       } else {
         const landInfo = data[`${key.x},${key.y}`];
+        console.log(data);
+        console.log(landInfo);
         if (landInfo) {
           loader.classList.add("hidden");
           location.textContent = `${key.x},${key.y}`;
 
-          name.textContent = landInfo.name;
-          desc.innerHTML = ` <p>${landInfo.description}</p>`;
-          links.innerHTML = ` <a href='http://localhost:9000/'>http://localhost:9000/</a>`;
-
+          name.textContent = landInfo.name ? landInfo.name : "MetaBitz";
+          desc.innerHTML = ` <p>${
+            landInfo.description
+              ? landInfo.description
+              : ` <p> The Metabitz is a community-driven platform where investors can monetize assets, build experiences, networking, business, and negotiation through the cannabis market on the blockchain.</p>
+            <p>The Metabitz metaverse compromises to build a MAP made up of 142.000 M2bitz. M2bitz owners can host content and events, stake CBZTOKEN to earn and customize assets, monetize assets and experiences, vote in the metaverse governance, do business, network, and more, everything connected with cannabis marketing. Also, you can trade your M2bitz ownership to get a profit with the valorization in that movement, that is going to the new digital future. Visit our project</p>`
+          }</p>`;
+          if (landInfo.links[0]) {
+            links.innerHTML = ` <a href='${landInfo.links[0]}'>${landInfo.links[0]}</a>`;
+          }
           slides.innerHTML = `<div class="carousel-item active"><img src=${
             landInfo.images[0] ? landInfo.images[0] : "/assets/logo.png"
           } width="250px" height="250px" class="d-inline-block " alt=""></div>
