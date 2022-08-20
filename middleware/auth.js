@@ -15,6 +15,7 @@ function verify(req, res, next) {
 
   res.redirect("/login");
 }
+
 function verifyLand(req, res, next) {
   let token = req.headers.cookie?.split("=");
 

@@ -8,6 +8,7 @@ function grid() {
   const factor = 100;
   let isLoading = true;
   let data = null;
+  let ownedLands;
 
   function openNav(key) {
     let indicators = document.getElementById("indicators");
@@ -25,7 +26,6 @@ function grid() {
     //  fetch info from the database for a specific land
 
     if (key.state) {
-      console.log("key", key);
       if (isLoading) {
         landInfo.classList.add("hidden");
       } else {
@@ -49,8 +49,6 @@ function grid() {
         landInfo.classList.add("hidden");
       } else {
         const landInfo = data[`${key.x},${key.y}`];
-        console.log(data);
-        console.log(landInfo);
         if (landInfo) {
           loader.classList.add("hidden");
           location.textContent = `${key.x},${key.y}`;
@@ -161,46 +159,76 @@ function grid() {
   let video = document.getElementById("com_video");
 
   const resetSelections = () => {
-    d3.selectAll("rect.square").style("fill", "#04e38b");
+    // d3.selectAll("rect.square").style("fill", "#04e38b");
     d3.selectAll("rect.square24").style("stroke", "#fff");
     d3.selectAll("rect.square12").style("stroke", "#fff");
     d3.selectAll("rect.square6").style("stroke", "#fff");
   };
 
-  const clickLand = function (e) {
+  const addModal = new bootstrap.Modal(document.getElementById("addModal"), {
+    keyboard: false,
+  });
+
+  const clickLand = function (e, x, y, rects) {
     e.preventDefault();
     e.stopPropagation();
-
-    verifyWalletLands().then((data) => {
-      console.log(data);
-    });
-
-    jQuery("#view-lands-button").hide();
 
     var mousePos = e.target.__data__;
 
-    resetSelections();
-    d3.select(e.target).style("fill", "#FF69B4");
+    openNav({
+      x: mousePos.x / factor,
+      y: mousePos.y / factor,
+      empty: true,
+    });
 
-    openNav({ x: mousePos.x / factor, y: mousePos.y / factor, empty: true });
+    ownedLands.map((land) => {
+      if (land[0] == x && land[1] == y) {
+        jQuery("#view-lands-button").hide();
+
+        resetSelections();
+        // d3.select(
+        //   e.target.textContent !== ""
+        //     ? e.target.parentNode.children[0]
+        //     : rects.filter((d, i) => d.x === x * 100 && d.y === y * 100)
+        //         ._groups[0][0]
+        // ).style("fill", "#FF69B4");
+
+        addModal.show();
+        let coordinateX = document.getElementById("coordinateX");
+        let coordinatey = document.getElementById("coordinateY");
+        coordinateX.value = x;
+        coordinatey.value = y;
+      }
+    });
   };
 
   const clickState = function (e, state = null, rects) {
-    jQuery("#view-lands-button").show();
     e.preventDefault();
     e.stopPropagation();
 
-    isLoggedIn();
-
-    resetSelections();
     const [x, y] = e.target.__data__;
-    d3.select(
-      e.target.textContent !== ""
-        ? e.target.parentNode.children[0]
-        : rects.filter((d, i) => d[0] === x && d[1] === y)._groups[0][0]
-    ).style("stroke", "#FF69B4");
 
-    openNav({ x, y, state });
+    ownedLands.map((land) => {
+      if (land[0] == x && land[1] == y) {
+        jQuery("#view-lands-button").show();
+        isLoggedIn();
+
+        resetSelections();
+        d3.select(
+          e.target.textContent !== ""
+            ? e.target.parentNode.children[0]
+            : rects.filter((d, i) => d[0] === x && d[1] === y)._groups[0][0]
+        ).style("stroke", "#FF69B4");
+
+        openNav({ x, y, state });
+
+        addModal.show();
+        let coordinateX = document.getElementById("coordinateX");
+        let coordinatey = document.getElementById("coordinateY");
+        coordinateX.value = x;
+        coordinatey.value = y;
+      }
+    });
   };
 
   //TODO: separate d3 functions
@@ -219,16 +247,23 @@ function grid() {
     const states12 = createStates(12);
     const states6 = createStates(6);
     const states = { ...states24, ...states12, ...states6 };
-    const addModal = new bootstrap.Modal(document.getElementById("addModal"), {
-      keyboard: false,
-    });
 
-    grid
+    const square = grid
       .call(zoom)
       .append("g")
       .selectAll(".square")
       .data(data)
       .enter()
+      .append("g")
+      .on("click", (e) => {
+        const x = e.target.x.baseVal.value / 100;
+        const y = e.target.y.baseVal.value / 100;
+        clickLand(e, x, y, square.select("rect"));
+      });
+
+    // for drawing rect squares instead of images
+
+    square
       .append("rect")
       .attr("class", "square")
       .filter((d) => !states[`${d.x},${d.y}`])
@@ -246,8 +281,19 @@ function grid() {
       })
       .style("fill", "#04e38b")
       .style("stroke", "#000")
-      .style("stroke-width", "5")
-      .on("click", clickLand);
+      .style("stroke-width", "5");
+
+    square
+      .append("image")
+      .attr("class", "square")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .attr("width", function (d) {
+        return factor - 2.5;
+      })
+      .attr("height", function (d) {
+        return factor - 2.5;
+      });
 
     const group24 = grid
       .select("g")
@@ -257,14 +303,7 @@ function grid() {
       .append("g")
       .on("click", (e) => {
         clickState(e, states24, group24.select("rect"));
-        const [x, y] = e.target.__data__;
-        addModal.show();
-        let coordinateX = document.getElementById("coordinateX");
-        let coordinatey = document.getElementById("coordinateY");
-        coordinateX.value = x;
-        coordinatey.value = y;
       });
-
     group24
       .append("rect")
       .attr("class", "square24")
@@ -301,12 +340,6 @@ function grid() {
       .append("g")
       .on("click", (e) => {
         clickState(e, states12, group12.select("rect"));
-        const [x, y] = e.target.__data__;
-        addModal.show();
-        let coordinateX = document.getElementById("coordinateX");
-        let coordinatey = document.getElementById("coordinateY");
-        coordinateX.value = x;
-        coordinatey.value = y;
       });
 
     group12
@@ -345,12 +378,6 @@ function grid() {
       .append("g")
       .on("click", (e) => {
         clickState(e, states6, group6.select("rect"));
-        const [x, y] = e.target.__data__;
-        addModal.show();
-        let coordinateX = document.getElementById("coordinateX");
-        let coordinatey = document.getElementById("coordinateY");
-        coordinateX.value = x;
-        coordinatey.value = y;
       });
 
     group6
@@ -396,70 +423,6 @@ function grid() {
     landsModal.show();
   });
 
-  var btn = document.getElementById("test");
-
-  btn.addEventListener(
-    "click",
-    function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // const data = window.coordinates.map((x) => ({
-      //   x: x[0] * factor,
-      //   y: x[1] * -1 * factor,
-      // }));
-
-      // var t = document.getElementById("test");
-      let t = d3.selectAll("rect[x='1300'][y='-1100']");
-
-      d3.select(t._groups[0][0]).style("fill", "#FF69B4");
-
-      console.log(t);
-      console.log(t._groups[0][0]);
-      const grid = d3.select("svg#mapSvg");
-      const container = grid.node().getBoundingClientRect();
-      const width = container.width;
-      const height = container.height;
-      const x0 = -150 * factor;
-      const x1 = 150 * factor;
-      const y0 = -47 * factor;
-      const y1 = 48 * factor;
-
-      const aspectWidth = x1 - x0;
-      const aspectHeight = y1 - y0;
-
-      console.log(aspectWidth);
-      console.log(aspectHeight);
-      const xScale = (width / aspectWidth) * 0.95;
-      const yScale = (height / aspectHeight) * 0.98;
-      const minScale = Math.min(xScale, yScale);
-
-      const start = d3.zoomIdentity
-        .translate(width / 2, height / 2)
-        .scale(0.8)
-        .translate(-1300, 1000);
-      console.log("width", -(x0 + x1) / 2);
-      console.log(start);
-      zoom.transform(grid, start);
-      grid.call(zoom.transform, start);
-
-      let div = document.getElementById("screenshot");
-
-      // Use the html2canvas
-      // function to take a screenshot
-      // and append it
-      // to the output div
-      html2canvas(div).then(function (canvas) {
-        // document.getElementById("output").appendChild(canvas);
-        var link = document.createElement("a");
-        link.download = "filename.png";
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    },
-    false
-  );
-
   function fetchData() {
     // fetch data and draw images
     get().then((res) => {
@@ -477,9 +440,8 @@ function grid() {
         for (const group in states) {
           states[group].map((state) => {
             const { coordinates, logo } = res[coord]; // pulling data from response
+            const grid = d3.select("svg#mapSvg");
             if (_.isEqual(state, coordinates)) {
-              const grid = d3.select("svg#mapSvg");
-
               // if the image on 12x12 tile
               if (group == 12) {
                 const group12 = grid
@@ -521,17 +483,52 @@ function grid() {
                   group12.style("fill", "none");
                 }
               }
+            } else {
+              const group1 = grid
+                .select("g")
+                .selectAll(".square")
+                .filter((d, i) => {
+                  return (
+                    d.x === coordinates[0] * 100 && d.y === coordinates[1] * 100
+                  );
+                });
+              if (logo) {
+                group1.attr("xlink:href", logo);
+                group1.style("fill", "none");
+              }
             }
           });
         }
       }
+    });
+
+    // fetch owned lands
+
+    verifyWalletLands().then((data) => {
+      console.log(data);
+      ownedLands = data.lands;
+      ownedLands.forEach((ownedLand) => {
+        const land = d3.selectAll(
+          `rect[x='${ownedLand[0] * 100}'][y='${ownedLand[1] * 100}']`
+        );
+        d3.select("svg#mapSvg")
+          .select("g")
+          .selectAll(".square")
+          .filter((d, i) => {
+            return d.x === ownedLand[0] * 100 && d.y === ownedLand[1] * 100;
+          })
+          .attr("xlink:href", "");
+
+        d3.select(land._groups[0][0]).style("fill", "#FF69B4");
+        d3.select(land._groups[0][1]).style("stroke-width", "30");
+        d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      });
     });
   }
 
   function isLoggedIn() {
     verifyWalletConnection().then((data) => {
       if (data) {
-        console.log(data);
         // draw grid for the first time
         if (isGridDrawn) {
           console.log("wallet connection verified");
@@ -563,7 +560,6 @@ function grid() {
             ele.type === "file" ? ele.files : ele.value,
         };
       });
-    console.log(data);
     let formData = new FormData(form);
     formData.set("coordinateX", data[0].coordinateX);
     formData.set("coordinateY", data[1].coordinateY);

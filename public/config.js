@@ -1,11 +1,11 @@
 export const config = {
   contract: {
-    contract_address: "0xb89a2d9c03c32A94423981FcF7e2a36cd98f517e",
+    contract_address: "0x931258fb3C737bE7722934A884D561d8cE61a7C0",
     mint_price: "40000000000000000",
     mint_function: "mint",
     sale_live: "paused",
   },
   requirements: {
-    chain_id: 137,
+    chain_id: 4,
   },
 };

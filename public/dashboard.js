@@ -1,7 +1,8 @@
 /** @format */
-import { get, add, getRequests } from "./api.js ";
+import { get, add, getRequests, getUsers, getCompanies } from "./api.js ";
 
 function grid() {
+  let formType = "person";
   const d3 = window.d3;
   const factor = 100;
   let isLoading = true;
@@ -165,7 +166,7 @@ function grid() {
     d3.selectAll("rect.square6").style("stroke", "#fff");
   };
 
-  const clickLand = function (e) {
+  const clickLand = function (e, x, y, rects) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -174,7 +175,12 @@ function grid() {
     var mousePos = e.target.__data__;
 
     resetSelections();
-    d3.select(e.target).style("fill", "#FF69B4");
+    d3.select(
+      e.target.textContent !== ""
+        ? e.target.parentNode.children[0]
+        : rects.filter((d, i) => d.x === x * 100 && d.y === y * 100)
+            ._groups[0][0]
+    ).style("fill", "#FF69B4");
 
     openNav({ x: mousePos.x / factor, y: mousePos.y / factor, empty: true });
   };
@@ -194,7 +200,6 @@ function grid() {
     openNav({ x, y, state });
   };
 
-  //TODO: separate d3 functions
   function drawGrid() {
     const grid = d3
       .select("#mapSvg")
@@ -214,12 +219,56 @@ function grid() {
       keyboard: false,
     });
 
-    grid
+    // const square = grid
+    //   .call(zoom)
+    //   .append("g")
+    //   .selectAll(".square")
+    //   .data(data)
+    //   .enter()
+    //   .append("image")
+    //   .attr("class", "square")
+    //   .attr("xlink:href", "/assets/1.png")
+    //   .attr("x", (d) => d.x)
+    //   .attr("y", (d) => d.y)
+    //   .attr("width", function (d) {
+    //     return factor;
+    //   })
+    //   .attr("height", function (d) {
+    //     return factor;
+    //   })
+    //   .on("click", (e) => {
+    //     clickLand(e);
+    //     const x = e.target.x.baseVal.value / 100;
+    //     const y = e.target.y.baseVal.value / 100;
+    //     addModal.show();
+    //     let coordinateX = document.getElementById("coordinateX");
+    //     let coordinatey = document.getElementById("coordinateY");
+    //     coordinateX.value = x;
+    //     coordinatey.value = y;
+    //   });
+
+    // for drawing rect squares instead of images
+    const square = grid
       .call(zoom)
       .append("g")
       .selectAll(".square")
       .data(data)
       .enter()
+      .append("g")
+      .on("click", (e) => {
+        const x = e.target.x.baseVal.value / 100;
+        const y = e.target.y.baseVal.value / 100;
+        clickLand(e, x, y, square.select("rect"));
+        addModal.show();
+        let coordinateX = document.getElementById("coordinateX");
+        let coordinatey = document.getElementById("coordinateY");
+        coordinateX.value = x;
+        coordinatey.value = y;
+      });
+
+    // for drawing rect squares instead of images
+
+    square
       .append("rect")
       .attr("class", "square")
       .filter((d) => !states[`${d.x},${d.y}`])
@@ -237,8 +286,19 @@ function grid() {
       })
       .style("fill", "#04e38b")
       .style("stroke", "#000")
-      .style("stroke-width", "5")
-      .on("click", clickLand);
+      .style("stroke-width", "5");
+
+    square
+      .append("image")
+      .attr("class", "square")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .attr("width", function (d) {
+        return factor - 2.5;
+      })
+      .attr("height", function (d) {
+        return factor - 2.5;
+      });
 
     const group24 = grid
       .select("g")
@@ -385,139 +445,92 @@ function grid() {
     landsModal.show();
   });
 
-  var btn = document.getElementById("test");
-
-  btn.addEventListener(
-    "click",
-    function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // const data = window.coordinates.map((x) => ({
-      //   x: x[0] * factor,
-      //   y: x[1] * -1 * factor,
-      // }));
-
-      // var t = document.getElementById("test");
-      let t = d3.selectAll("rect[x='1300'][y='-1100']");
-
-      d3.select(t._groups[0][0]).style("fill", "#FF69B4");
-
-      console.log(t);
-      console.log(t._groups[0][0]);
-      const grid = d3.select("svg#mapSvg");
-      const container = grid.node().getBoundingClientRect();
-      const width = container.width;
-      const height = container.height;
-      const x0 = -150 * factor;
-      const x1 = 150 * factor;
-      const y0 = -47 * factor;
-      const y1 = 48 * factor;
-
-      const aspectWidth = x1 - x0;
-      const aspectHeight = y1 - y0;
-
-      console.log(aspectWidth);
-      console.log(aspectHeight);
-      const xScale = (width / aspectWidth) * 0.95;
-      const yScale = (height / aspectHeight) * 0.98;
-      const minScale = Math.min(xScale, yScale);
-
-      const start = d3.zoomIdentity
-        .translate(width / 2, height / 2)
-        .scale(0.8)
-        .translate(-1300, 1000);
-      console.log("width", -(x0 + x1) / 2);
-      console.log(start);
-      zoom.transform(grid, start);
-      grid.call(zoom.transform, start);
-
-      let div = document.getElementById("screenshot");
-
-      // Use the html2canvas
-      // function to take a screenshot
-      // and append it
-      // to the output div
-      html2canvas(div).then(function (canvas) {
-        // document.getElementById("output").appendChild(canvas);
-        var link = document.createElement("a");
-        link.download = "filename.png";
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    },
-    false
-  );
-
   // draw grid for the first time
   drawGrid();
   reset();
 
-  // fetch data and draw images
-  get().then((res) => {
-    // converting array (response) to object
-    let objectData = {};
-    for (const index in res) {
-      let land = res[index];
-      objectData[`${land.coordinates[0]},${land.coordinates[1]}`] = land;
-    }
-    data = objectData;
-    isLoading = false;
-
-    // updating images on the map
-    for (const coord in res) {
-      for (const group in states) {
-        states[group].map((state) => {
-          const { coordinates, logo } = res[coord]; // pulling data from response
-          if (_.isEqual(state, coordinates)) {
-            const grid = d3.select("svg#mapSvg");
-
-            // if the image on 12x12 tile
-            if (group == 12) {
-              const group12 = grid
-                .select("g")
-                .selectAll(".square12")
-                .filter(
-                  (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
-                );
-              if (logo) {
-                group12.attr("xlink:href", logo);
-                group12.style("fill", "none");
-              }
-            }
-
-            // if the image on 24x24 tile
-            if (group == 24) {
-              const group12 = grid
-                .select("g")
-                .selectAll(".square24")
-                .filter(
-                  (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
-                );
-              if (logo) {
-                group12.attr("xlink:href", logo);
-                group12.style("fill", "none");
-              }
-            }
-
-            // if the image on 6x6 tile
-            if (group == 6) {
-              const group12 = grid
-                .select("g")
-                .selectAll(".square6")
-                .filter(
-                  (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
-                );
-              if (logo) {
-                group12.attr("xlink:href", logo);
-                group12.style("fill", "none");
-              }
-            }
-          }
-        });
+  const fetchData = () => {
+    // fetch data and draw images
+    get().then((res) => {
+      // converting array (response) to object
+      let objectData = {};
+      for (const index in res) {
+        let land = res[index];
+        objectData[`${land.coordinates[0]},${land.coordinates[1]}`] = land;
       }
-    }
-  });
+      data = objectData;
+      isLoading = false;
+
+      // updating images on the map
+
+      for (const coord in res) {
+        for (const group in states) {
+          states[group].map((state) => {
+            const { coordinates, logo } = res[coord]; // pulling data from response
+            const grid = d3.select("svg#mapSvg");
+            if (_.isEqual(state, coordinates)) {
+              // if the image on 12x12 tile
+              if (group == 12) {
+                const group12 = grid
+                  .select("g")
+                  .selectAll(".square12")
+                  .filter(
+                    (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
+                  );
+                if (logo) {
+                  group12.attr("xlink:href", logo);
+                  group12.style("fill", "none");
+                }
+              }
+
+              // if the image on 24x24 tile
+              if (group == 24) {
+                const group12 = grid
+                  .select("g")
+                  .selectAll(".square24")
+                  .filter(
+                    (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
+                  );
+                if (logo) {
+                  group12.attr("xlink:href", logo);
+                  group12.style("fill", "none");
+                }
+              }
+
+              // if the image on 6x6 tile
+              if (group == 6) {
+                const group12 = grid
+                  .select("g")
+                  .selectAll(".square6")
+                  .filter(
+                    (d, i) => d[0] === coordinates[0] && d[1] === coordinates[1]
+                  );
+                if (logo) {
+                  group12.attr("xlink:href", logo);
+                  group12.style("fill", "none");
+                }
+              }
+            } else {
+              const group1 = grid
+                .select("g")
+                .selectAll(".square")
+                .filter((d, i) => {
+                  return (
+                    d.x === coordinates[0] * 100 && d.y === coordinates[1] * 100
+                  );
+                });
+              if (logo) {
+                group1.attr("xlink:href", logo);
+                group1.style("fill", "none");
+              }
+            }
+          });
+        }
+      }
+    });
+  };
+
+  fetchData();
 
   // onsubmit form logic
   const form = document.getElementById("add-form");
@@ -537,6 +550,8 @@ function grid() {
     formData.set("coordinateY", data[1].coordinateY);
     add(formData);
   });
+
+  //  requests logic
 
   const addTable = new bootstrap.Modal(document.getElementById("addTable"), {
     keyboard: false,
@@ -563,6 +578,98 @@ function grid() {
     });
 
     addTable.show();
+  });
+
+  // profiles logic
+
+  const addProfiles = new bootstrap.Modal(
+    document.getElementById("addProfiles"),
+    {
+      keyboard: false,
+    }
+  );
+
+  document.getElementById("profiles-button").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const tbody = document.getElementById("tbody");
+    getUsers().then((users) => {
+      tbody.innerHTML = `${users.map((user) => {
+        return `<tr>
+      <td>${user.username}</td>
+      <td>${user.email}</td>
+      <td>${user.name} </td>
+      <td><img class='img-thumbnail;' style='width:100px' src="${user.requestedLogo}" alt="" /></td>
+      <td ><div class='d-flex flex-column'>
+    </tr>`;
+      })}
+   `;
+    });
+
+    addProfiles.show();
+
+    const profilesTable = document.getElementById("profilesTable");
+    const person = document.getElementById("person-tab-button");
+    const company = document.getElementById("company-tab-button");
+
+    person.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      company.classList.remove("active");
+      person.classList.add("active");
+      formType = "person";
+
+      profilesTable.innerHTML = `
+      <table id="profilesTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Website</th>
+          <th>Bio</th>
+          <th>Looking for</th>
+          <th>Interested in</th>
+          <th>wallet</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+      `;
+    });
+
+    company.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      person.classList.remove("active");
+      company.classList.add("active");
+      formType = "company";
+
+      profilesTable.innerHTML = `
+      <table id="profilesTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Website</th>
+          <th>Bio</th>
+          <th>Looking for</th>
+          <th>Interested in</th>
+          <th>Service</th>
+          <th>wallet</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+      `;
+    });
   });
 }
 

@@ -21,4 +21,8 @@ router.get("/client", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "..", "/views/client.html")));
 });
 
+router.get("/profile", (req, res) => {
+  res.sendFile(path.resolve(path.join(__dirname, "..", "/views/profile.html")));
+});
+
 module.exports = router;

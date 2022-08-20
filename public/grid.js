@@ -1,5 +1,13 @@
 /** @format */
 import { get } from "./api.js ";
+import {
+  stateCoords,
+  statesstext,
+  statelessCoords,
+  statessHead6,
+  statessHead12,
+  statessHead24,
+} from "./statess.js";
 
 function grid() {
   const d3 = window.d3;
@@ -115,6 +123,7 @@ function grid() {
 
   const createStates = (number) => {
     const stateRect = {};
+    const t = [];
     const startPos = window.states[number];
     for (const start of startPos) {
       const rect = [];
@@ -124,8 +133,11 @@ function grid() {
           rect.push(pos);
         }
       }
+      t.push(start);
+
       stateRect[`${start[0]},${start[1]}`] = rect;
     }
+    console.log(t);
     return stateRect;
   };
 
@@ -211,12 +223,27 @@ function grid() {
     const states6 = createStates(6);
     const states = { ...states24, ...states12, ...states6 };
 
-    grid
+    const square = grid
       .call(zoom)
       .append("g")
       .selectAll(".square")
       .data(data)
       .enter()
+      .append("g")
+      .on("click", (e) => {
+        const x = e.target.x.baseVal.value / 100;
+        const y = e.target.y.baseVal.value / 100;
+        clickLand(e, x, y, square.select("rect"));
+        addModal.show();
+        let coordinateX = document.getElementById("coordinateX");
+        let coordinatey = document.getElementById("coordinateY");
+        coordinateX.value = x;
+        coordinatey.value = y;
+      });
+
+    // for drawing rect squares instead of images
+
+    square
       .append("rect")
       .attr("class", "square")
       .filter((d) => !states[`${d.x},${d.y}`])
@@ -234,8 +261,19 @@ function grid() {
       })
       .style("fill", "#04e38b")
       .style("stroke", "#000")
-      .style("stroke-width", "5")
-      .on("click", clickLand);
+      .style("stroke-width", "5");
+
+    square
+      .append("image")
+      .attr("class", "square")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .attr("width", function (d) {
+        return factor - 2.5;
+      })
+      .attr("height", function (d) {
+        return factor - 2.5;
+      });
 
     const group24 = grid
       .select("g")
@@ -336,34 +374,6 @@ function grid() {
         return 12 * factor;
       });
 
-    // group12
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 2 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 5.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "200px")
-    //   .text(function (d) {
-    //     return "Available";
-    //   });
-
-    // group12
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 4 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 7.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "150px")
-    //   .text(function (d) {
-    //     return "12x12";
-    //   });
-
     const group6 = grid
       .select("g")
       .selectAll(".square6")
@@ -398,34 +408,10 @@ function grid() {
       .attr("height", function (d) {
         return 6 * factor;
       });
+  }
 
-    // group6
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 0.5 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 3 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "120px")
-    //   .text(function (d) {
-    //     return "Available";
-    //   });
-
-    // group6
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 2.25 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 4 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "80px")
-    //   .text(function (d) {
-    //     return "6x6";
-    //   });
+  function delay(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
   }
 
   jQuery("#closebtn").click((e) => {
@@ -440,72 +426,144 @@ function grid() {
     );
     landsModal.show();
   });
-  var link = document.createElement("a");
 
-  var btn = document.getElementById("test");
-  btn.addEventListener(
-    "click",
-    function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  // var link = document.createElement("a");
 
-      const data = window.coordinates.map((x) => ({
-        x: x[0] * factor,
-        y: x[1] * -1 * factor,
-      }));
-      var interval = 10000;
+  // const ttt = [];
+  // window.coordinates.forEach((coord) => {
+  //   if (statesstext.includes(`[${coord[0]}, ${-1 * coord[1]}]`)) {
+  //     console.log("YEEEEEEEEEEEEEEEEEEEEEEEEEE");
+  //   } else {
+  //     ttt.push([coord[0], coord[1]]);
+  //   }
+  // });
+  // console.log(ttt);
 
-      // var t = document.getElementById("test");
-      data.forEach(async (coord, i) => {
-        setTimeout(() => {
-          let x = coord.x;
-          let y = coord.y;
-          let t = d3.selectAll(`rect[x='${x}'][y='${y}']`);
+  // var videoo = document.querySelector("video");
+  // var canvas = (window.canvas = document.createElement("canvas"));
+  // canvas.width = 480;
+  // canvas.height = 360;
 
-          d3.select(t._groups[0][0]).style("fill", "#FF69B4");
+  // var edge_constraints = {
+  //   videoo: true,
+  // };
 
-          console.log(t);
-          console.log(t._groups[0][0]);
-          const grid = d3.select("svg#mapSvg");
-          const container = grid.node().getBoundingClientRect();
-          const width = container.width;
-          const height = container.height;
-          const x0 = -150 * factor;
-          const x1 = 150 * factor;
-          const y0 = -47 * factor;
-          const y1 = 48 * factor;
+  // var ff_constraints = {
+  //   videoo: {
+  //     mediaSource: "window",
+  //   },
+  // };
 
-          const aspectWidth = x1 - x0;
-          const aspectHeight = y1 - y0;
+  // function handleSuccess(stream) {
+  //   window.stream = stream; // make stream available to browser console
+  //   videoo.srcObject = stream;
+  // }
 
-          console.log(aspectWidth);
-          console.log(aspectHeight);
-          const xScale = (width / aspectWidth) * 0.95;
-          const yScale = (height / aspectHeight) * 0.98;
-          const minScale = Math.min(xScale, yScale);
+  // function handleError(error) {
+  //   console.log("navigator.getDisplayMedia error: ", error);
+  // }
 
-          const start = d3.zoomIdentity
-            .translate(width / 2, height / 2)
-            .scale(0.7)
-            .translate(-x, -y);
-          console.log("width", -(x0 + x1) / 2);
-          console.log(start);
-          zoom.transform(grid, start);
-          grid.call(zoom.transform, start);
+  // if (typeof RTCIceGatherer !== "undefined") {
+  //   navigator
+  //     .getDisplayMedia(edge_constraints)
+  //     .then(handleSuccess)
+  //     .catch(handleError);
+  // } else if (typeof navigator.mediaDevices.getDisplayMedia !== "undefined") {
+  //   navigator.mediaDevices
+  //     .getDisplayMedia(edge_constraints)
+  //     .then(handleSuccess)
+  //     .catch(handleError);
+  // } else {
+  //   navigator.mediaDevices
+  //     .getUserMedia(ff_constraints)
+  //     .then(handleSuccess)
+  //     .catch(handleError);
+  // }
 
-          let div = document.getElementById("screenshot");
+  // var btn = document.getElementById("test");
+  // btn.addEventListener(
+  //   "click",
+  //   function (e) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
 
-          // html2canvas(div, { allowTaint: true }).then(function (canvas) {
-          //   link.download = "filename.png";
-          //   link.href = canvas.toDataURL();
-          //   link.click();
-          //   d3.select(t._groups[0][0]).style("fill", "#04e38b");
-          // });
-        }, i * 10000);
-      });
-    },
-    false
-  );
+  //     const dataA = statessHead6.map((x) => ({
+  //       x: x[0] * factor,
+  //       y: x[1] * factor,
+  //     }));
+
+  //     dataA.forEach(async (coord, i) => {
+  //       setTimeout(async () => {
+  //         let x = coord.x;
+  //         let y = coord.y;
+  //         let t = d3.selectAll(`rect[x='${x}'][y='${y}']`);
+
+  //         // d3.select(t._groups[0][0]).style("fill", "#FF69B4");
+  //         d3.select(t._groups[0][0]).style("stroke", "#FF69B4");
+  //         // d3.select(t._groups[0][1]).style("stroke-width", "30");
+  //         d3.select(t._groups[0][1]).style("stroke", "#FF69B4");
+
+  //         const grid = d3.select("svg#mapSvg");
+  //         const container = grid.node().getBoundingClientRect();
+  //         const width = container.width;
+  //         const height = container.height;
+  //         const x0 = -150 * factor;
+  //         const x1 = 150 * factor;
+  //         const y0 = -47 * factor;
+  //         const y1 = 48 * factor;
+
+  //         const aspectWidth = x1 - x0;
+  //         const aspectHeight = y1 - y0;
+
+  //         const xScale = (width / aspectWidth) * 0.95;
+  //         const yScale = (height / aspectHeight) * 0.98;
+  //         const minScale = Math.min(xScale, yScale);
+
+  //         const start = d3.zoomIdentity
+  //           .translate(width / 2, height / 2)
+  //           .scale(0.4)
+  //           // .translate(-x + 1240, -y);
+  //           .translate(-x + 1290, -y - 3 * 100);
+  //         zoom.transform(grid, start);
+  //         grid.call(zoom.transform, start);
+
+  //         // let div = document.getElementById("screenshot");
+
+  //         canvas.width = 630;
+  //         canvas.height = 630;
+
+  //         delay(100)
+  //           .then(() => {
+  //             canvas
+  //               .getContext("2d")
+  //               .drawImage(
+  //                 videoo,
+  //                 1290,
+  //                 228,
+  //                 canvas.width,
+  //                 canvas.height,
+  //                 0,
+  //                 0,
+  //                 canvas.width,
+  //                 canvas.height
+  //               );
+
+  //             const frame = canvas.toDataURL("image/png");
+  //             link.download = `${x / 100 + "," + y / 100}.png`;
+  //             link.href = frame;
+  //             link.click();
+  //           })
+  //           .then(() => {
+  //             // d3.select(t._groups[0][0]).style("fill", "#04e38b");
+  //             d3.select(t._groups[0][0]).style("stroke", "#04e38b");
+  //             d3.select(t._groups[0][1]).style("stroke", "#04e38b");
+  //           });
+  //       }, i * 200);
+  //     });
+  //   },
+  //   false
+  // );
+
   // draw grid for the first time
   drawGrid();
   reset();
@@ -518,9 +576,8 @@ function grid() {
       for (const group in states) {
         states[group].map((state) => {
           const { coordinates, logo } = res[coord]; // pulling data from response
+          const grid = d3.select("svg#mapSvg");
           if (_.isEqual(state, coordinates)) {
-            const grid = d3.select("svg#mapSvg");
-
             // if the image on 12x12 tile
             if (group == 12) {
               const group12 = grid
@@ -555,6 +612,19 @@ function grid() {
                 );
               group12.attr("xlink:href", logo);
               group12.style("fill", "none");
+            }
+          } else {
+            const group1 = grid
+              .select("g")
+              .selectAll(".square")
+              .filter((d, i) => {
+                return (
+                  d.x === coordinates[0] * 100 && d.y === coordinates[1] * 100
+                );
+              });
+            if (logo) {
+              group1.attr("xlink:href", logo);
+              group1.style("fill", "none");
             }
           }
         });

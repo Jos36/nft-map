@@ -88,10 +88,8 @@ export const abi = [
     type: "event",
   },
   {
-    inputs: [
-      { internalType: "address[100]", name: "_users", type: "address[100]" },
-    ],
-    name: "add100PresaleUsers",
+    inputs: [{ internalType: "address[]", name: "_users", type: "address[]" }],
+    name: "addMultiplePresaleUsers",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -268,7 +266,7 @@ export const abi = [
       { internalType: "address", name: "from", type: "address" },
       { internalType: "address", name: "to", type: "address" },
       { internalType: "uint256", name: "tokenId", type: "uint256" },
-      { internalType: "bytes", name: "data", type: "bytes" },
+      { internalType: "bytes", name: "_data", type: "bytes" },
     ],
     name: "safeTransferFrom",
     outputs: [],

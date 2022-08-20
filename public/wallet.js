@@ -1,6 +1,7 @@
 /** @format */
 import { abi } from "/abi.js";
 import { config } from "/config.js";
+import { landsIdToCoord } from "./landsIdToCoord.js";
 
 const Web3Modal = window.Web3Modal.default;
 
@@ -46,7 +47,6 @@ let verifySetup = async () => {
   // if (accountData.chain_id != config.requirements.chain_id) {
   //   Notiflix.Notify.failure("Wrong Chain ID! Switch to Ethereum Mainnet.");
   // }
-  console.log(accountData.chain_id);
 };
 
 let total_amt;
@@ -61,7 +61,6 @@ let getTotalSupplyInterval = async () => {
   if (res) {
     console.log("total supply", res);
     if (supplyElement) {
-      console.log(total_amt);
       if (total_amt) {
         supplyElement.innerText = `${res} / 10000 Minted`;
       } else {
@@ -85,9 +84,7 @@ let connectWallet = async () => {
   }
   accountData = await getAccountData();
   await verifySetup();
-  console.log(accountData);
   window.accountData = accountData;
-  console.log(window.accountData);
   provider.on("accountsChanged", async (accounts) => {
     if (accounts.length == 0) return;
     accountData = await getAccountData();
@@ -113,7 +110,6 @@ const handleWalletConnect = async () => {
   const signer = provider.getSigner();
   const myAddress = await signer.getAddress();
   connectButton.innerText = "Connected";
-  console.log(myAddress);
   return;
   const nftContract = new ethers.Contract(contractAddress, abi, signer);
   const lands = await nftContract.getLands(myAddress);
@@ -137,7 +133,7 @@ const initialize = () => {
       //   connectButton.innerText = "Connected";
       //   connectButton.disabled = false;
       // } else {
-      connectButton.innerText = "Connect";
+      // connectButton.innerText = "Connect";
       connectButton.onclick = connectWallet;
       connectButton.disabled = false;
       // }
@@ -160,9 +156,7 @@ export async function verifyWalletConnection() {
   }
   accountData = await getAccountData();
   await verifySetup();
-  console.log(accountData);
   window.accountData = accountData;
-  console.log(window.accountData);
   provider.on("accountsChanged", async (accounts) => {
     if (accounts.length == 0) return;
     accountData = await getAccountData();
@@ -176,12 +170,36 @@ export async function verifyWalletConnection() {
     console.log(accountData);
   });
   Notiflix.Notify.success("Wallet verified");
-  console.log(window.accountData);
   return accountData;
 }
 
+async function getNFTs(address) {
+  const res = await fetch(`/api/getNFTs?address=${address}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json; charset=utf-8;",
+    },
+  });
+
+  let data = await res.json();
+
+  if (data.success) {
+    let lands = [];
+    const nfts = data.data.result;
+    nfts.map((landOwned) => {
+      lands.push(landsIdToCoord[landOwned.token_id].split(","));
+    });
+    return lands;
+  } else {
+    console.log("Moralis error");
+  }
+}
+
 export async function verifyWalletLands() {
+  let landsById;
   let lands;
+
   try {
     provider = await web3Modal.connect();
     web3 = new Web3(provider);
@@ -194,13 +212,15 @@ export async function verifyWalletLands() {
     return;
   }
   accountData = await getAccountData();
-  if (!contract) return;
-  lands = await contract.methods.balanceOf(accountData.account).call();
+
+  // const landsCount = await contract.methods
+  //   .balanceOf(accountData.account)
+  //   .call();
+  // console.log(landsCount);
 
   await verifySetup();
-  console.log(accountData);
   window.accountData = accountData;
-  console.log(window.accountData);
+
   provider.on("accountsChanged", async (accounts) => {
     if (accounts.length == 0) return;
     accountData = await getAccountData();
@@ -215,8 +235,8 @@ export async function verifyWalletLands() {
   });
 
   Notiflix.Notify.success("Wallet verified");
-  console.log(window.accountData);
-  console.log(lands);
+  lands = await getNFTs(accountData.account);
+
   return { accountData, lands };
 }
 

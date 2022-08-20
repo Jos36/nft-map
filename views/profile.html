@@ -40,7 +40,6 @@
 
       body {
         background-color: #000000;
-        overflow: hidden;
       }
 
       .btns {
@@ -62,108 +61,153 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">
-              Request Company
+            <h5
+              class="modal-title"
+              style="margin-left: 130px"
+              id="staticBackdropLabel"
+            >
+              Complete your profile
             </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
+            <ul class="nav nav-tabs" style="margin-bottom: 20px">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="#"
+                  id="person-tab-button"
+                  >Person</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="#"
+                  id="company-tab-button"
+                  >Company</a
+                >
+              </li>
+            </ul>
             <form id="add-form" method="post">
               <div class="mb-2">
-                <label for="" class="form-label">Coordinates</label>
-                <div class="d-flex align-items-center col-5 gap-2">
-                  <span>X</span>
-                  <input
-                    disabled
-                    type="text"
-                    name="coordinateX"
-                    class="form-control form-control-sm"
-                    id="coordinateX"
-                  />
-                  <span>Y</span>
-                  <input
-                    disabled
-                    type="text"
-                    name="coordinateY"
-                    class="form-control form-control-sm"
-                    id="coordinateY"
-                  />
-                </div>
-              </div>
-              <div class="mb-2">
-                <label for="" class="form-label">Name</label>
+                <span>Name</span>
                 <input
                   type="text"
-                  required
                   name="name"
                   class="form-control form-control-sm"
                   id="name"
                 />
               </div>
               <div class="mb-2">
-                <label for="" class="form-label">Description</label>
+                <label for="" class="form-label">Username</label>
                 <input
                   type="text"
                   required
-                  name="description"
+                  name="username"
                   class="form-control form-control-sm"
-                  id="desc"
+                  id="username"
                 />
               </div>
               <div class="mb-2">
-                <label for="" class="form-label">Logo</label>
+                <label for="" class="form-label">Email</label>
                 <input
-                  type="file"
+                  type="text"
                   required
-                  name="logo"
+                  name="email"
                   class="form-control form-control-sm"
-                  id="logo"
+                  id="email"
                 />
               </div>
               <div class="mb-2">
-                <label for="" class="form-label"
-                  >Images <small>(You can choose multiple images)</small></label
-                >
+                <label for="" class="form-label">Location</label>
                 <input
-                  type="file"
-                  multiple
+                  type="text"
                   required
-                  name="images"
+                  name="location"
                   class="form-control form-control-sm"
-                  id="images"
+                  id="location"
                 />
               </div>
               <div class="mb-2">
-                <label for="" class="form-label"
-                  >Video <small>(You can upload multiple videos)</small></label
-                >
+                <label for="" class="form-label">Company</label>
                 <input
-                  type="file"
-                  name="videos"
+                  type="text"
+                  required
+                  name="company"
                   class="form-control form-control-sm"
-                  id="videos"
+                  id="company"
                 />
               </div>
               <div class="mb-2">
+                <label for="" class="form-label">Role</label>
+                <input
+                  type="text"
+                  required
+                  name="role"
+                  class="form-control form-control-sm"
+                  id="role"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Website</label>
+                <input
+                  type="text"
+                  name="website"
+                  class="form-control form-control-sm"
+                  id="website"
+                />
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Bio</label>
+                <input
+                  type="text"
+                  name="bio"
+                  class="form-control form-control-sm"
+                  id="bio"
+                />
+              </div>
+
+              <div style="width: 220px">
                 <label for="" class="form-label"
-                  >Videos links <br />
-                  <small
-                    >(e.g : http://www.youtube.com/2423,
-                    http://www.xyz.com/s423)</small
-                  ></label
+                  >What are you looking for?</label
+                >
+                <multi-input>
+                  <input list="speakers" />
+                  <datalist id="speakers">
+                    <option value="Cannabis market"></option>
+                    <option value="Blockchain"></option>
+                    <option value="Web 3"></option>
+                    <option value="Crypto"></option>
+                    <option value="Investments in cannabis"></option>
+                    <option value="Investments in crypto"></option>
+                    <option value="Investments in Cannabitz"></option>
+                    <option value="Networking"></option>
+                    <option value="Study"></option>
+                    <option value="Social media"></option>
+                    <option value="News"></option>
+                    <option value="Events"></option>
+                    <option value="Metaverse"></option>
+                    <option value="Products"></option>
+                    <option value="Services"></option>
+                    <option value="Job offers"></option>
+                    <option value="Meet new people"></option>
+                  </datalist>
+                </multi-input>
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label"
+                  >What topics are you interested in?</label
                 >
                 <input
                   type="text"
-                  name="links"
+                  name="whatTopicsAreYouInterestedIn"
                   class="form-control form-control-sm"
-                  id="links"
+                  id="whatTopicsAreYouInterestedIn"
                 />
               </div>
+
               <input
                 type="submit"
                 value="Request"
@@ -211,10 +255,10 @@
             <button class="btn link-light" onclick="reset()">Reset</button>
             <a id="connect-button" class="btn btn-success">Connected</a>
             <a
-              href="/profile"
+              href="/client"
               id="profile-button"
               class="btn btn-outline-success"
-              >Profile</a
+              >Dashboard</a
             >
 
             <a href="/login" class="btn btn-outline-success">Login</a>
@@ -230,99 +274,17 @@
             padding-left: 100px;
           "
         >
-          User Panel
+          User Profile
         </p>
       </nav>
     </div>
 
-    <svg id="mapSvg"></svg>
-
-    <div id="clientLoader" class="loader" style="margin-left: 48%"></div>
-
-    <div id="myNav" class="overlay" style="z-index: 999999">
-      <div id="loader" class="loader"></div>
-      <div class="landInfo" id="landInfo">
-        <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
-        <div class="overlay-content p-2">
-          <div class="container-fluid">
-            <div class="">
-              <div
-                id="carouselExampleIndicators"
-                class="mt-2 carousel slide m-0"
-                style="height: 40%"
-                data-bs-ride="carousel"
-              >
-                <div class="carousel-indicators" id="indicators"></div>
-                <div class="carousel-inner text-center" id="slides"></div>
-                <button
-                  class="carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                  class="carousel-control-next"
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide="next"
-                >
-                  <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-              <div class="col">
-                <div class="m-0 mt-2 blockquote" style="color: greenyellow">
-                  <i class="fa-solid fa-location-dot text-danger"></i>
-                  <small id="com_location"></small>
-                  <button
-                    id="view-lands-button"
-                    class="btn btn-outline-light"
-                    style="float: right"
-                  >
-                    View lands
-                  </button>
-                </div>
-                <h4 class="text-white mt-0 text-break" id="com_name"></h4>
-                <span>
-                  <h6 class="mt-3 text-light">
-                    <i class="fa-solid fa-pen-to-square"></i
-                    ><span class="text-decoration-none"> Description</span>
-                  </h6>
-                  <small
-                    class="text-white"
-                    style="text-justify: auto; text-align: justify"
-                    id="com_description"
-                  >
-                  </small
-                  ><br /><br />
-                  <h6 class="text-white text-decoration-underline">Links</h6>
-                  <small class="text-primary" id="com_links"></small><br />
-                </span>
-              </div>
-              <div class="col text-white mt-5">
-                <h5>Videos</h5>
-                <video
-                  id="com_video"
-                  src=""
-                  style="width: 350px; height: fit-content"
-                  controls
-                  autoplay="true"
-                ></video>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="info"></div>
+    <div
+      id="clientLoader"
+      class="loader"
+      style="margin-left: 45%; margin-top: 22rem"
+    ></div>
 
     <div
       class="modal fade hide"
@@ -365,44 +327,6 @@
       </div>
     </div>
 
-    <script>
-      async function applyRequest(id) {
-        const formData = new FormData();
-        formData.set("id", id);
-
-        const res = await fetch(`/api/apply`, {
-          method: "POST",
-          headers: {
-            accept: "application/json;",
-          },
-          body: formData,
-        });
-        let data = await res.json();
-        if (data.success) {
-          window.location.reload();
-        }
-      }
-
-      async function rejectRequest(id) {
-        console.log(id);
-        console.log(formData);
-        for (var pair of formData.entries()) {
-          console.log(pair[0] + ", " + pair[1]);
-        }
-        const res = await fetch(`/api/reject`, {
-          method: "POST",
-          headers: {
-            accept: "application/json;",
-          },
-          body: formData,
-        });
-        let data = await res.json();
-        if (data.success) {
-          window.location.reload();
-        }
-      }
-    </script>
-
     <!-- walletconnect -->
     <script
       type="text/javascript"
@@ -440,7 +364,8 @@
     ></script>
     <script src="./coordinates.js"></script>
     <script src="./states.js"></script>
+    <script src="./multi-input.js"></script>
     <script src="./wallet.js" type="module"></script>
-    <script type="module" src="./client.js"></script>
+    <script type="module" src="./profile.js"></script>
   </body>
 </html>
