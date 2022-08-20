@@ -40,6 +40,7 @@ const Schema = new mongoose.Schema(
     },
     wallet: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }

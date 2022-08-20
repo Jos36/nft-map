@@ -107,7 +107,6 @@ export async function checkUser(wallet) {
   return data.user;
 }
 export async function getUsers() {
-  console.log("ssssssss");
   const res = await fetch(`/api/getUsers`, {
     method: "GET",
     headers: {
@@ -117,6 +116,7 @@ export async function getUsers() {
   });
 
   let data = await res.json();
+  console.log(data);
   return data.users;
 }
 
@@ -130,6 +130,7 @@ export async function getCompanies() {
   });
 
   let data = await res.json();
+
   return data.com;
 }
 

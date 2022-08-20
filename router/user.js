@@ -13,7 +13,6 @@ router.post("/add", verify, async (req, res) => {
   try {
     console.log("Adding");
     const signature = parseJWT(req.headers.cookie);
-    console.log(signature);
     await uploadFile(req, res);
     const land = await Companies.find({
       coordinates: [req.body.coordinateX, req.body.coordinateY],
@@ -137,7 +136,6 @@ router.post("/request", async (req, res) => {
       isRequested: true,
     };
     console.log(data);
-    console.log(req.files.images);
     req.files.images?.forEach((img) => {
       data.requestedImages.push(`/images/${img.filename}`);
     });

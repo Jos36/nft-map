@@ -591,19 +591,28 @@ function grid() {
 
   document.getElementById("profiles-button").addEventListener("click", (e) => {
     e.preventDefault();
+    const tbody = document.getElementById("tprofiles");
 
-    const tbody = document.getElementById("tbody");
     getUsers().then((users) => {
       tbody.innerHTML = `${users.map((user) => {
         return `<tr>
-      <td>${user.username}</td>
-      <td>${user.email}</td>
-      <td>${user.name} </td>
-      <td><img class='img-thumbnail;' style='width:100px' src="${user.requestedLogo}" alt="" /></td>
-      <td ><div class='d-flex flex-column'>
-    </tr>`;
+        <td>${user.name}</td>
+        <td>${user.username}</td>
+        <td>${user.email} </td>
+        <td>${user.location} </td>
+        <td>${user.company} </td>
+        <td>${user.role} </td>
+        <td>${user.website} </td>
+        <td>${user.bio} </td>
+        <td>${user.whatAreYouLookingFor.map((l) => {
+          return `<p>${l}</p>`;
+        })} </td>
+        <td>${user.whatTopicsAreYouInterestedIn} </td>
+        <td><small>${user.wallet}</small> </td>
+       
+      </tr>`;
       })}
-   `;
+     `;
     });
 
     addProfiles.show();
@@ -636,9 +645,32 @@ function grid() {
           <th>wallet</th>
         </tr>
       </thead>
-      <tbody id="tbody"></tbody>
+      <tbody id="tprofiles"></tbody>
     </table>
       `;
+
+      const tbody = document.getElementById("tprofiles");
+      getUsers().then((users) => {
+        tbody.innerHTML = `${users.map((user) => {
+          return `<tr>
+          <td>${user.name}</td>
+          <td>${user.username}</td>
+          <td>${user.email} </td>
+          <td>${user.location} </td>
+          <td>${user.company} </td>
+          <td>${user.role} </td>
+          <td>${user.website} </td>
+          <td>${user.bio} </td>
+          <td>${user.whatAreYouLookingFor.map((l) => {
+            return `<p>${l}</p>`;
+          })} </td>
+          <td>${user.whatTopicsAreYouInterestedIn} </td>
+          <td><small>${user.wallet}</small> </td>
+         
+        </tr>`;
+        })}
+       `;
+      });
     });
 
     company.addEventListener("click", (e) => {
@@ -666,9 +698,34 @@ function grid() {
           <th>wallet</th>
         </tr>
       </thead>
-      <tbody id="tbody"></tbody>
+      <tbody id="tprofiles"></tbody>
     </table>
       `;
+
+      const tbody = document.getElementById("tprofiles");
+      getCompanies().then((users) => {
+        console.log(users);
+        tbody.innerHTML = `${users.map((user) => {
+          return `<tr>
+          <td>${user.name}</td>
+          <td>${user.username}</td>
+          <td>${user.email} </td>
+          <td>${user.location} </td>
+          <td>${user.company} </td>
+          <td>${user.role} </td>
+          <td>${user.website} </td>
+          <td>${user.bio} </td>
+          <td>${user.whatKindOfServiceYouOffer} </td>
+          <td>${user.whatAreYouLookingFor.map((l) => {
+            return `<p>${l}</p>`;
+          })} </td>
+          <td>${user.whatTopicsAreYouInterestedIn} </td>
+          <td><small>${user.wallet}</small> </td>
+         
+        </tr>`;
+        })}
+       `;
+      });
     });
   });
 }

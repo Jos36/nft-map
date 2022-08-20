@@ -1,13 +1,13 @@
 /** @format */
 import { get } from "./api.js ";
-import {
-  stateCoords,
-  statesstext,
-  statelessCoords,
-  statessHead6,
-  statessHead12,
-  statessHead24,
-} from "./statess.js";
+// import {
+//   stateCoords,
+//   statesstext,
+//   statelessCoords,
+//   statessHead6,
+//   statessHead12,
+//   statessHead24,
+// } from "./statess.js";
 
 function grid() {
   const d3 = window.d3;
@@ -137,7 +137,6 @@ function grid() {
 
       stateRect[`${start[0]},${start[1]}`] = rect;
     }
-    console.log(t);
     return stateRect;
   };
 
