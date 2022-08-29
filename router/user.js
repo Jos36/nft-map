@@ -205,7 +205,7 @@ router.get("/getNFTs", async (req, res) => {
   console.log("address", address);
   let config = {
     method: "get",
-    url: `https://deep-index.moralis.io/api/v2/${address}/nft?chain=rinkeby&format=decimal`,
+    url: `https://deep-index.moralis.io/api/v2/${address}/nft?chain=eth&format=decimal`,
     headers: { Accept: "application/json", "X-API-Key": key },
   };
 
