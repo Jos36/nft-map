@@ -46,6 +46,124 @@
       .btns {
         position: relative;
       }
+
+
+     
+      canvas {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: absolute;
+      }
+
+      body {
+        background-color: #000000;
+        overflow: hidden;
+      }
+
+      .btns {
+        position: relative;
+      }
+
+      #mySvgSmall {
+        transform: scale(0.1);
+      }
+      .floating-container-grid {
+        display: flex;
+      }
+      .range-wrapper {
+        width: 28px;
+        height: 125px;
+        border-radius: 1px;
+        display: flex;
+        flex-direction: row;
+        color: white !important;
+        justify-content: center;
+        align-items: center;
+        background-color: #555555;
+      }
+      .range {
+        transform: rotate(90deg);
+        -webkit-appearance: none;
+        width: 111px;
+        position: absolute;
+        height: 23px;
+        color: #fff;
+        top: 68px;
+        right: -40px;
+        background-color: #555555;
+        margin: 0;
+        border-radius: 3px;
+      }
+      .width {
+        width: 30px;
+        flex-direction: column;
+        /* margin-left: 20px; */
+        position: absolute;
+        top: 6px;
+        left: 145px;
+      }
+      .smal-grid-button-plus {
+        position: absolute;
+
+        width: 27px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0084ff;
+        font-size: 19px;
+        line-height: 15px;
+        font-family: "Montserrat Regular", "Verdana", sans-serif;
+        color: #fff;
+        text-align: center;
+      }
+      .smal-grid-button-deduct {
+        position: absolute;
+        width: 27px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0084ff;
+        font-size: 19px;
+        line-height: 15px;
+        font-family: "Montserrat Regular", "Verdana", sans-serif;
+        color: #fff;
+        text-align: center;
+        top: 140px;
+      }
+      .svg-small {
+        width: 10vw;
+        height: 18vh;
+        transform: scale(1.1);
+        position: relative;
+        left: 13px;
+        top: 14px;
+      }
+      .center-map {
+        display: flex !important;
+        justify-content: center !important;
+        text-align: center !important;
+        text-align: center !important;
+      }
+
+      /* / width / */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* / Track / */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
+
+      /* / Handle / */
+      ::-webkit-scrollbar-thumb {
+        background: #505861;
+        border-radius: 10px;
+      }
+    
+
     </style>
   </head>
 
@@ -303,9 +421,201 @@
         </div>
       </div>
     </div>
+ <!-- our header -->
+    <div>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand">Explore</a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="nav-item">
+                <a href="#" class="navbar-brand">Stats</a>
+              </li>
 
-    <div style="height: 80px">
-      <nav
+              <li class="nav-item dropdown">
+                <a href="#" class="navbar-brand" data-bs-toggle="dropdown"
+                  >Resources</a
+                >
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item">Helo Center</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Platform Status</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Partners</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">Taxes</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Blog</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Docs</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Newsletter</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <div style="display: flex">
+                      <i class="fa-brands fa-twitter icon-sty"></i>
+                      <i class="fa-brands fa-instagram icon-sty"></i>
+                      <i class="fa-brands fa-discord icon-sty"></i>
+
+                      <i class="fa-brands fa-discord icon-sty"></i>
+                      <i class="fa-brands fa-youtube icon-sty"></i>
+                      <i class="fa-brands fa-tiktok icon-sty"></i>
+                    </div>
+                  </a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="navbar-brand">Create</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ms-auto">
+              <li class="dropdown">
+                <a
+                  class="d-flex align-items-center hidden-arrow"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    class="rounded-circle"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-user icon-style"></i
+                    ><span>Profile</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-regular fa-heart icon-style"></i
+                    ><span>Favorites</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-eye icon-style"></i
+                    ><span>Watchlist</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-table-cells icon-style"></i
+                    ><span>My Collection</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-gear icon-style"></i
+                    ><span>Settings</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i
+                      class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
+                    ></i
+                    ><span>Log Out</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <div style="display: flex; margin-right: 10px">
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-solid fa-moon mood-icon icon-style"></i
+                      ><span>Night Mode</span></a
+                    >
+                    <label class="toggle mt-2">
+                      <input class="toggle-checkbox" type="checkbox" />
+                      <div class="toggle-switch"></div>
+                    </label>
+                  </div>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a
+                  class="d-flex align-items-center hidden-arrow"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <!-- <i class="fa-thin fa-wallet icon-style"></i> -->
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/879/879762.png"
+                    class="icon-dropdown"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                  />
+                </a>
+                <div class="dropdown-menu dropdown-menu-end wallet-div">
+                   <div style="display:flex ;">
+                    <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    class="rounded-circle mt-1"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                  <h5 class="name-mtz">
+                    THE_METABITZ 
+                  </h5>  
+                  </div>
+                  <div class="dropdown-divider"></div>
+                   <div class="border-div">
+                   <span class="blnce-text">
+                    Total balance 
+                   </span>
+                   <h5 class="balance">
+                    $321.44 USD 
+                   </h5>
+                   <div class="botom-div">
+                    <span>Add Funds</span>
+                   </div>
+                   </div>
+                   <div class="dropdown-divider"></div>
+                      <div class="row border-dic-eth">
+                        <div class="col-lg-1">
+                          <i class="fa-brands fa-ethereum icon-ethc"></i>
+                        </div>
+                        <div class="col-lg-5">
+                          <span  class="blnce-text">ETH</span>
+                          <br/>
+                          <h5>Ethereum</h5>
+                        </div>
+                        <div class="col-lg-5 float-right">
+                          <span  class="blnce-text">0.2041</span>
+                          <br/>
+                          <h5>$321.44 USD</h5>
+                        </div>
+                        <div class="col-lg-1">
+                          <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+       </nav>
+      <!-- <nav
         class="navbar navbar-dark fixed-top p-2 pt-4"
         style="background-color: #000000"
       >
@@ -351,13 +661,43 @@
         >
           Admin Panel
         </p>
-      </nav>
+      </nav> -->
     </div>
-    <button id="test"></button>
-    <div style="background-color: black" id="screenshot">
-      <svg id="mapSvg"></svg>
-    </div>
+    <div class="floating-container-grid mt-5 " style="margin-left:10px;">
+      <div class="small-grid">
+        <div class="center-map">
+          <svg id="mapSvgdash" class="svg-small"></svg>
+        </div>
+        <!-- <canvas id="mapSvgSmall" class="mapcanvs"> </canvas> -->
+        <!-- <canvas id="mapSvgSmall" class="mapcanvs">  -->
 
+        <div class="width">
+          <button id="zoom_in" class="smal-grid-button-plus">+</button>
+
+          <input type="range" step="0.1" max="1" min="0" class="range" />
+
+          <button class="smal-grid-button-deduct" id="zoom_out">-</button>
+        </div>
+      </div>
+      <div>
+        <div class="togle-show-blue">
+          <i class="fas fa-angle-right icon-togle"></i>
+        </div>
+
+        <div class="togle-show mt-2">
+          <i class="fa-sharp fa-solid fa-circle-info icon-togle"></i>
+        </div>
+
+        <div class="togle-show mt-2">
+          <i class="fa-solid fa-list icon-togle"></i>
+        </div>
+      </div>
+    </div>
+      <div style="background-color: black" id="screenshot">
+        <svg id="mapSvg"></svg>
+      </div>
+ 
+    
     <div id="myNav" class="overlay" style="z-index: 999999">
       <div id="loader" class="loader"></div>
       <div class="landInfo" id="landInfo">
@@ -560,5 +900,7 @@
     <script src="./states.js"></script>
     <script src="./wallet.js" type="module"></script>
     <script type="module" src="./dashboard.js"></script>
+    <script type="module" src="./dashboardSmalSvg.js"></script>
+
   </body>
 </html>

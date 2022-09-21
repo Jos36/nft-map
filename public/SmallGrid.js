@@ -44,8 +44,6 @@ function grid() {
         landInfo.classList.add("hidden");
       } else {
         const landInfo = data[`${key.x},${key.y}`];
-        // console.log(data);
-        // console.log(landInfo);
         if (landInfo) {
           loader.classList.add("hidden");
           location.textContent = `${key.x},${key.y}`;
@@ -105,57 +103,108 @@ function grid() {
   }
 
   const zoom = d3.zoom().on("zoom", handleZoom);
+  let scroller = document.querySelector("#mapSvgSmall");
+
+  scroller.addEventListener("wheel", function (event) {
+    console.log(event.wheelDelta);
+
+    if (event.wheelDelta < 0) {
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      console.log(transform);
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      console.log(values);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) - parseFloat(0.01)) +
+          ")"
+      );
+      console.log(d3.select("svg#mapSvg > g").attr("transform"));
+
+      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
+      let values1 = transform1
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values1[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values1[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values1[2]) - parseFloat(0.01)) +
+          ")"
+      );
+    } else {
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) + parseFloat(0.01)) +
+          ")"
+      );
+
+      let transformS = d3.select("svg#mapSvgSmall > g").attr("transform");
+      let valuesS = transformS
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(valuesS[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(valuesS[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(valuesS[2]) + parseFloat(0.01)) +
+          ")"
+      );
+    }
+  });
   function handleZoom(e) {
-    d3.select("svg#mapSvg > g").attr("transform", e.transform);
-    d3.select("svg#mapSvgSmall > g").attr("transform", e.transform);
+    console.log("called");
+    if (
+      e.transform.x === parseFloat(69.12001037597656) &&
+      e.transform.y === parseFloat(37.46112408701579)
+    ) {
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" + 270 + ", " + 120 + ") scale(" + 0.1 + ")"
+      );
+    }
+    // }
+
+    //
+    //
   }
 
-  // function handleZoom(e) {
-  //   console.log("the zoom e is here", e.transform.y);
-  //   var lastScrollTop = 0;
-  //   d3.selectAll(".center-map").on("scroll", function (event) {
-  //     alert();
-  //     let st = d3.selectAll(".center-map").scrollTop();
-  //     if (st < lastScrollTop) {
-  //       console.log("up 1");
-  //     } else {
-  //       console.log("down 1");
-  //     }
-  //     lastScrollTop = st;
-  //   });
-  //   if (
-  //     e.transform.x === parseFloat(69.12001037597656) &&
-  //     e.transform.y === parseFloat(37.46112408701579)
-  //   ) {
-  //     d3.select("svg#mapSvg > g").attr(
-  //       "transform",
-  //       "translate(" + 270 + ", " + 120 + ") scale(" + 0.1 + ")"
-  //     );
-  //   } else {
-  //     d3.select("svg#mapSvg > g").attr("transform", e.transform);
-  //     let transform = d3.select("svg#mapSvgsmall > g").attr("transform");
-  //     let values = transform
-  //       .replace(/[^0-9., ]/g, "")
-  //       .split(/[ ,]+/)
-  //       .join(",")
-  //       .split(",");
-  //     // zoom.scaleBy(grid.transition(), 4);
-  //     d3.select("svg#mapSvgsmall > g").attr(
-  //       "transform",
-  //       "translate(" +
-  //         (parseFloat(values[0]) + parseFloat(20)) +
-  //         ", " +
-  //         (parseFloat(values[1]) + parseFloat(20)) +
-  //         ") scale(" +
-  //         (parseFloat(values[2]) + parseFloat(0.01)) +
-  //         ")"
-  //     );
-  //   }
-  //   // }
+  //
 
-  //   //
-  //   //
-  // }
+  //
   const createStates = (number) => {
     const stateRect = {};
     const t = [];
@@ -176,7 +225,7 @@ function grid() {
   };
 
   function reset() {
-    const grid = d3.select("svg#mapSvg");
+    const grid = d3.select("svg#mapSvgSmall");
     const container = grid.node().getBoundingClientRect();
     const width = container.width;
     const height = container.height;
@@ -204,31 +253,26 @@ function grid() {
   /* Open when someone clicks on the span element */
   let video = document.getElementById("com_video");
 
-  const resetSelections = () => {
-    d3.selectAll("rect.square").style("fill", "#04e38b");
-    d3.selectAll("rect.square24").style("stroke", "#fff");
-    d3.selectAll("rect.square12").style("stroke", "#fff");
-    d3.selectAll("rect.square6").style("stroke", "#fff");
-  };
+  // const resetSelections = () => {
+  //   d3.selectAll("rect.square").style("fill", "#04e38b");
+  //   d3.selectAll("rect.square24").style("stroke", "#fff");
+  //   d3.selectAll("rect.square12").style("stroke", "#fff");
+  //   d3.selectAll("rect.square6").style("stroke", "#fff");
+  // };
 
-  const clickLand = function (e, x, y, rects) {
-    e.preventDefault();
-    e.stopPropagation();
+  // const clickLand = function (e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
 
-    jQuery("#view-lands-button").hide();
+  //   jQuery("#view-lands-button").hide();
 
-    var mousePos = e.target.__data__;
+  //   var mousePos = e.target.__data__;
 
-    resetSelections();
-    d3.select(
-      e.target.textContent !== ""
-        ? e.target.parentNode.children[0]
-        : rects.filter((d, i) => d.x === x * 100 && d.y === y * 100)
-            ._groups[0][0]
-    ).style("fill", "#FF69B4");
+  //   resetSelections();
+  //   d3.select(e.target).style("fill", "#FF69B4");
 
-    openNav({ x: mousePos.x / factor, y: mousePos.y / factor, empty: true });
-  };
+  //   openNav({ x: mousePos.x / factor, y: mousePos.y / factor, empty: true });
+  // };
 
   const clickState = function (e, state = null, rects) {
     jQuery("#view-lands-button").show();
@@ -245,63 +289,16 @@ function grid() {
     openNav({ x, y, state });
   };
 
-  // d3.selectAll("#zoom_in").on("click", function () {
-  //   console.log("this is plus button");
-  //   let transform = d3.select("svg#mapSvgSmall > g").attr("transform");
-  //   let values = transform
-  //     .replace(/[^0-9., ]/g, "")
-  //     .split(/[ ,]+/)
-  //     .join(",")
-  //     .split(",");
-  //   // zoom.scaleBy(grid.transition(), 4);
-  //   d3.select("svg#mapSvgSmall > g").attr(
-  //     "transform",
-  //     "translate(" +
-  //       (parseFloat(values[0]) + parseFloat(20)) +
-  //       ", " +
-  //       (parseFloat(values[1]) + parseFloat(20)) +
-  //       ") scale(" +
-  //       (parseFloat(values[2]) + parseFloat(0.01)) +
-  //       ")"
-  //   );
-  // });
-
-  // d3.selectAll("#zoom_out").on("click", function () {
-  //   console.log("this is - button");
-  //   let transform = d3.select("svg#mapSvgSmall > g").attr("transform");
-  //   let values = transform
-  //     .replace(/[^0-9., ]/g, "")
-  //     .split(/[ ,]+/)
-  //     .join(",")
-  //     .split(",");
-  //   // zoom.scaleBy(grid.transition(), 4);
-  //   d3.select("svg#mapSvgSmall > g").attr(
-  //     "transform",
-  //     "translate(" +
-  //       (parseFloat(values[0]) - parseFloat(20)) +
-  //       ", " +
-  //       (parseFloat(values[1]) - parseFloat(20)) +
-  //       ") scale(" +
-  //       (parseFloat(values[2]) - parseFloat(0.01)) +
-  //       ")"
-  //   );
-  // });
-
-  // d3.selectAll("#zoom_in").on("click", function () {
-  //   // zoom();
-  //   zoom.scaleBy(square.transition().duration(10), 0.2);
-  // });
-
-  // d3.selectAll("#zoom_out").on("click", function () {
-  //   zoom.scaleBy(mapSvg, 1 / 1.3);
-  // });
-
   //TODO: separate d3 functions
   function drawGrid() {
     const grid = d3
-      .select("#mapSvg")
-      .style("width", "100vw")
-      .style("height", "calc(100vh - 150px)"); // minus the top bar including margin-top
+      .select("#mapSvgSmall")
+      .style("width", "90vw")
+      .style("height", "calc(100vh)") // minus the top bar including margin-top
+      .style("transform", "scale(0.1)") // minus the top bar including margin-top
+      .style("position", "absolute") // minus the top bar including margin-top
+      .style("left", "-40vw") // minus the top bar including margin-top
+      .style("top", "-38vh"); // minus the top bar including margin-top
 
     const data = window.coordinates.map((x) => ({
       x: x[0] * factor,
@@ -330,6 +327,85 @@ function grid() {
         coordinateX.value = x;
         coordinatey.value = y;
       });
+
+    d3.selectAll("#zoom_in").on("click", function () {
+      console.log("this is plus button");
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) + parseFloat(0.01)) +
+          ")"
+      );
+      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
+      console.log(transform1);
+      let values1 = transform1
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      console.log(values1);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values1[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(values1[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values1[2]) + parseFloat(0.01)) +
+          ")"
+      );
+    });
+
+    d3.selectAll("#zoom_out").on("click", function () {
+      console.log("this is - button");
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) - parseFloat(0.01)) +
+          ")"
+      );
+
+      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
+      let values1 = transform1
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values1[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values1[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values1[2]) - parseFloat(0.01)) +
+          ")"
+      );
+    });
 
     // for drawing rect squares instead of images
 
@@ -442,10 +518,10 @@ function grid() {
       .attr("x", (d) => d[0] * factor)
       .attr("y", (d) => d[1] * factor)
       .attr("width", function (d) {
-        return 12 * factor;
+        return 13 * factor;
       })
       .attr("height", function (d) {
-        return 12 * factor;
+        return 13 * factor;
       })
       .style("fill", "#23292f")
       .style("stroke", "white")
@@ -458,10 +534,10 @@ function grid() {
       .attr("x", (d) => d[0] * factor)
       .attr("y", (d) => d[1] * factor)
       .attr("width", function (d) {
-        return 12 * factor;
+        return 13 * factor;
       })
       .attr("height", function (d) {
-        return 12 * factor;
+        return 13 * factor;
       });
 
     const group6 = grid
@@ -504,18 +580,18 @@ function grid() {
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  // jQuery("#closebtn").click((e) => {
-  //   video.pause();
-  //   document.getElementById("myNav").style.width = "0%";
-  // });
+  jQuery("#closebtn").click((e) => {
+    video.pause();
+    document.getElementById("myNav").style.width = "0%";
+  });
 
-  // jQuery("#view-lands-button").click((e) => {
-  //   video.pause();
-  //   var landsModal = new bootstrap.Modal(
-  //     document.getElementById("view-lands-modal")
-  //   );
-  //   landsModal.show();
-  // });
+  jQuery("#view-lands-button").click((e) => {
+    video.pause();
+    var landsModal = new bootstrap.Modal(
+      document.getElementById("view-lands-modal")
+    );
+    landsModal.show();
+  });
   // draw grid for the first time
   drawGrid();
   reset();
@@ -528,7 +604,7 @@ function grid() {
       for (const group in states) {
         states[group].map((state) => {
           const { coordinates, logo } = res[coord]; // pulling data from response
-          const grid = d3.select("svg#mapSvg");
+          const grid = d3.select("svg#mapSvgSmall");
           if (_.isEqual(state, coordinates)) {
             // if the image on 12x12 tile
             if (group == 12) {

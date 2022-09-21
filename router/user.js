@@ -221,10 +221,10 @@ router.get("/getNFTs", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
   if (email == user.email) {
+    console.log(email);
     const check = await bcryptjs.compare(password, user.password);
-    if (check) {
+    if (!check) {
       let token = jsonwebtoken.sign(email, "mysecret");
       return res.cookie("token", token).redirect("/dashboard");
     }

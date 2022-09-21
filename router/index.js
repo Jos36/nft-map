@@ -7,6 +7,12 @@ router.get("/", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "..", "/views/index.html")));
 });
 
+router.get("/loginregister", (req, res) => {
+  res.sendFile(
+    path.resolve(path.join(__dirname, "..", "/views/loginregister.html"))
+  );
+});
+
 router.get("/login", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "..", "/views/login.html")));
 });

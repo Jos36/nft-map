@@ -108,11 +108,11 @@ function grid() {
     }
   }
 
+  const zoom = d3.zoom().on("zoom", handleZoom);
   function handleZoom(e) {
     d3.select("svg#mapSvg > g").attr("transform", e.transform);
+    d3.select("svg#mapSvgdash > g").attr("transform", e.transform);
   }
-
-  const zoom = d3.zoom().on("zoom", handleZoom);
 
   const createStates = (number) => {
     const stateRect = {};
