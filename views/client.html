@@ -46,6 +46,116 @@
       .btns {
         position: relative;
       }
+      #mySvgSmall {
+        transform: scale(0.1);
+      }
+      .floating-container-grid {
+        display: flex;
+        /* margin-top: 51px; */
+        position: absolute;
+      }
+      .range-wrapper {
+        width: 28px;
+        height: 125px;
+        border-radius: 1px;
+        display: flex;
+        flex-direction: row;
+        color: white !important;
+        justify-content: center;
+        align-items: center;
+        background-color: #555555;
+      }
+      .range {
+        transform: rotate(90deg);
+        -webkit-appearance: none;
+        width: 111px;
+        position: absolute;
+        height: 23px;
+        color: #fff;
+        top: 68px;
+        right: -40px;
+        background-color: #555555;
+        margin: 0;
+        border-radius: 3px;
+      }
+      .width {
+        width: 30px;
+        flex-direction: column;
+        /* margin-left: 20px; */
+        position: absolute;
+        top: 6px;
+        left: 145px;
+      }
+      .smal-grid-button-plus {
+        position: absolute;
+
+        width: 27px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0084ff;
+        font-size: 19px;
+        line-height: 15px;
+        font-family: "Montserrat Regular", "Verdana", sans-serif;
+        color: #fff;
+        text-align: center;
+      }
+      .smal-grid-button-deduct {
+        position: absolute;
+        width: 27px;
+        height: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0084ff;
+        font-size: 19px;
+        line-height: 15px;
+        font-family: "Montserrat Regular", "Verdana", sans-serif;
+        color: #fff;
+        text-align: center;
+        top: 140px;
+      }
+      .svg-small {
+        width: 10vw;
+        height: 18vh;
+        transform: scale(1.1);
+        position: relative;
+        left: 13px;
+        top: 14px;
+      }
+      .center-map {
+        display: flex !important;
+        justify-content: center !important;
+        text-align: center !important;
+        text-align: center !important;
+      }
+
+      /* / width / */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* / Track / */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+      }
+
+      /* / Handle / */
+      ::-webkit-scrollbar-thumb {
+        background: #505861;
+        border-radius: 10px;
+      }
+
+      .side-bar {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid white;
+        min-width: 300px !important;
+        background: #1b2026;
+        max-height: 92vh !important;
+        overflow-y: auto !important;
+        /* margin-top: 51px; */
+      }
     </style>
   </head>
 
@@ -183,8 +293,248 @@
         </div>
       </div>
     </div>
+    <div>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand">Explore</a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="nav-item">
+                <a href="#" class="navbar-brand">Stats</a>
+              </li>
 
-    <div style="height: 80px">
+              <li class="nav-item dropdown">
+                <a href="#" class="navbar-brand" data-bs-toggle="dropdown"
+                  >Resources</a
+                >
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item">Helo Center</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Platform Status</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Partners</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">Taxes</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Blog</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Docs</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item">Newsletter</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item">
+                    <div style="display: flex">
+                      <i class="fa-brands fa-twitter icon-sty"></i>
+                      <i class="fa-brands fa-instagram icon-sty"></i>
+                      <i class="fa-brands fa-discord icon-sty"></i>
+
+                      <i class="fa-brands fa-discord icon-sty"></i>
+                      <i class="fa-brands fa-youtube icon-sty"></i>
+                      <i class="fa-brands fa-tiktok icon-sty"></i>
+                    </div>
+                  </a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="navbar-brand">Create</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav ms-auto">
+              <li class="dropdown">
+                <a
+                  class="d-flex align-items-center hidden-arrow"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    class="rounded-circle"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a href="/profile" class="dropdown-item"
+                    ><i class="fa-solid fa-user icon-style"></i
+                    ><span>Profile</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-regular fa-heart icon-style"></i
+                    ><span>Favorites</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-eye icon-style"></i
+                    ><span>Watchlist</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-table-cells icon-style"></i
+                    ><span>My Collection</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item"
+                    ><i class="fa-solid fa-gear icon-style"></i
+                    ><span>Settings</span></a
+                  >
+
+                  <div class="dropdown-divider"></div>
+                  <a href="/" class="dropdown-item"
+                    ><i
+                      class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
+                    ></i
+                    ><span>Log Out</span></a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <div style="display: flex; margin-right: 10px">
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-solid fa-moon mood-icon icon-style"></i
+                      ><span>Night Mode</span></a
+                    >
+                    <label class="toggle mt-2">
+                      <input class="toggle-checkbox" type="checkbox" />
+                      <div class="toggle-switch"></div>
+                    </label>
+                  </div>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a
+                  class="d-flex align-items-center hidden-arrow"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <!-- <i class="fa-thin fa-wallet icon-style"></i> -->
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/879/879762.png"
+                    class="icon-dropdown"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                  />
+                </a>
+                <div class="dropdown-menu dropdown-menu-end wallet-div">
+                   <div style="display:flex ;">
+                    <img
+                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    class="rounded-circle mt-1"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                  <h5 class="name-mtz">
+                    THE_METABITZ 
+                  </h5>  
+                  </div>
+                  <div class="dropdown-divider"></div>
+                   <div class="border-div">
+                   <span class="blnce-text">
+                    Total balance 
+                   </span>
+                   <h5 class="balance">
+                    $321.44 USD 
+                   </h5>
+                   <div class="botom-div">
+                    <span>Add Funds</span>
+                   </div>
+                   </div>
+                   <div class="dropdown-divider"></div>
+                      <div class="row border-dic-eth">
+                        <div class="col-lg-1">
+                          <i class="fa-brands fa-ethereum icon-ethc"></i>
+                        </div>
+                        <div class="col-lg-5">
+                          <span  class="blnce-text">ETH</span>
+                          <br/>
+                          <h5>Ethereum</h5>
+                        </div>
+                        <div class="col-lg-5 float-right">
+                          <span  class="blnce-text">0.2041</span>
+                          <br/>
+                          <h5>$321.44 USD</h5>
+                        </div>
+                        <div class="col-lg-1">
+                          <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+       </nav>
+      <!-- <nav
+        class="navbar navbar-dark fixed-top p-2 pt-4"
+        style="background-color: #000000"
+      >
+        <div class="container-fluid px-5">
+          <a
+            class="navbar-brand p-0"
+            style="
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                sans-serif;
+              color: #1ceb87;
+              font-size: xx-large;
+              font-weight: bold;
+            "
+            href="/"
+          >
+            <img
+              src="/assets/m2bitzmap.png"
+              style="width: 250px"
+              alt=""
+            /><br />
+          </a>
+          <div class="d-flex gap-5 mt-2">
+            <button class="btn link-light" onclick="reset()">Reset</button>
+            <a href="https://mint.m2bitz.com/" class="btn btn-outline-success"
+              >Mint</a
+            >
+            <a id="connect-button" class="btn btn-outline-success">Connect</a>
+            <a id="profiles-button" class="btn btn-outline-success">Profiles</a>
+            <a id="addTableBtn" class="btn btn-outline-success">Requests</a>
+
+            <a href="/" class="btn btn-danger">Logout</a>
+          </div>
+        </div>
+        <p
+          style="
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+            color: red;
+            font-size: x-large;
+            font-weight: bold;
+            padding-left: 100px;
+          "
+        >
+          Admin Panel
+        </p>
+      </nav> -->
+    </div>
+    <!-- <div style="height: 80px">
       <nav
         class="navbar navbar-dark fixed-top p-2 pt-4"
         style="background-color: #000000"
@@ -237,6 +587,369 @@
           User Panel
         </p>
       </nav>
+    </div> -->
+    <div class="bottom-divs">
+      <div class="side-bar">
+        <div class="display">
+          <h3 class="text-head-map">MAP</h3>
+          <a href="#">Clear</a>
+        </div>
+
+        <div class="devider">.</div>
+
+        <div class="display">
+          <h4 class="head-text">Lite Map</h4>
+          <label class="toggle">
+            <input class="toggle-checkbox" type="checkbox" checked />
+            <div class="toggle-switch"></div>
+          </label>
+        </div>
+        <div class="devider">.</div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">For Sale</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">Premium</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">On OpenSea</h3>
+        </div>
+
+        <div class="devider">.</div>
+
+        <div class="display">
+          <h3 class="text-head ml-1">Find LAND on OpenSea</h3>
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="color: white; margin-right: 10px"
+          ></i>
+        </div>
+        <div class="devider">.</div>
+        <h3 class="head-text">SIZE</h3>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">1x1</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">6x6</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">12x12</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">24x24</h3>
+        </div>
+        <div class="devider">.</div>
+        <h3 class="head-text">CHAIN</h3>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <i class="fa-brands fa-ethereum colored-div"></i>
+          <h3 class="text">Ethereum</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <!-- <i class="fa-solid fa-vector-polygon colored-div2"></i> -->
+          <!-- <i class="fa-duotone fa-vector-polygon "></i> -->
+          <!-- <i class="fa-duotone fa-link colored-div2"></i> -->
+          <i class="fa-solid fa-draw-polygon colored-div3"></i>
+          <!-- <i class="fa-regular fa-solid fa-vector-polygon colored-div2"></i> -->
+          <h3 class="text">Polygon</h3>
+        </div>
+        <div class="devider">.</div>
+
+        <h3 class="head-text">COORDINATES</h3>
+
+        <div class="row bts">
+          <div class="col-lg-5 offset-1">
+            <p class="text">min (X,Y)</p>
+            <input type="text" class="inputs" />
+          </div>
+          <div class="col-lg-5">
+            <p class="text">min (X,Y)</p>
+            <input type="text" class="inputs" />
+          </div>
+        </div>
+        <div class="row" style="width: 100%">
+          <div class="col-lg-10 offset-1">
+            <button
+              type="button"
+              class="btn btn-info btn-color"
+              style="width: 100%; color: #fff"
+            >
+              apply
+            </button>
+          </div>
+        </div>
+        <div class="devider">.</div>
+
+        <div class="row bts">
+          <div class="col-lg-10 offset-1">
+            <h3 class="head-text">VALLET</h3>
+            <input
+              type="text"
+              class="inputs mr-2"
+              placeholder="EX: 0x785654b67t4b63"
+            />
+          </div>
+        </div>
+        <div class="devider">.</div>
+
+        <div class="row bts">
+          <div class="col-lg-10 offset-1">
+            <h3 class="head-text">PARTNERS</h3>
+            <input
+              type="text"
+              class="input-search mr-3"
+              placeholder="Search a Name"
+            />
+          </div>
+        </div>
+
+        <!-- last menu  -->
+        <div class="row">
+          <div class="col-lg-11 scrol-div">
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
+              <div class="list-group mx-3 mt-4">
+                <a href="#" class="list-group-itemstyle py-2">
+                  <i class="fas fa-chart-area fa-fw me-3"></i
+                  ><span>Atari </span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-lock fa-fw me-3"></i
+                  ><span>Avenged Sevenfold</span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-line fa-fw me-3"></i
+                  ><span>Analytics</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2">
+                  <i class="fas fa-chart-pie fa-fw me-3"></i
+                  ><span>Binance</span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-bar fa-fw me-3"></i
+                  ><span>Care Bears</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-globe fa-fw me-3"></i
+                  ><span>CoinMarketCap</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-building fa-fw me-3"></i
+                  ><span>Deadmau5</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-calendar fa-fw me-3"></i
+                  ><span>Gemini</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-users fa-fw me-3"></i
+                  ><span>Pranksy NFT Boxes</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-money-bill fa-fw me-3"></i
+                  ><span>REVV </span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-calendar fa-fw me-3"></i
+                  ><span>The Smurfs </span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-bar fa-fw me-3"></i
+                  ><span>Zepeto</span></a
+                >
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="floating-container-grid">
+          <div class="small-grid">
+            <div class="center-map">
+              <svg id="mapSvgSmall" class="svg-small"></svg>
+            </div>
+            <div class="width">
+              <button id="zoom_in" class="smal-grid-button-plus">+</button>
+
+              <input
+                type="range"
+                step="{value}"
+                max="5"
+                min="0"
+                class="range"
+              />
+
+              <button class="smal-grid-button-deduct" id="zoom_out">-</button>
+            </div>
+          </div>
+          <div>
+            <div class="togle-show-blue">
+              <i class="fas fa-angle-right icon-togle"></i>
+            </div>
+
+            <div class="togle-show mt-2">
+              <i class="fa-sharp fa-solid fa-circle-info icon-togle"></i>
+            </div>
+
+            <div class="togle-show mt-2">
+              <i class="fa-solid fa-list icon-togle"></i>
+            </div>
+          </div>
+        </div>
+
+        <svg id="mapSvg"></svg>
+
+        <!--  -->
+
+        <!-- <video id="videoo"  autoplay></video> -->
+
+        <div id="myNav" class="overlay" style="z-index: 999999">
+          <div id="loader" class="loader"></div>
+          <div class="landInfo" id="landInfo">
+            <a href="javascript:void(0)" class="closebtn" id="closebtn"
+              >&times;</a
+            >
+            <div class="overlay-content p-2">
+              <div class="container-fluid">
+                <div class="">
+                  <div
+                    id="carouselExampleIndicators"
+                    class="mt-2 carousel slide m-0"
+                    style="height: 40%"
+                    data-bs-ride="carousel"
+                  >
+                    <div class="carousel-indicators" id="indicators"></div>
+                    <div class="carousel-inner text-center" id="slides"></div>
+                    <button
+                      class="carousel-control-prev"
+                      type="button"
+                      data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="prev"
+                    >
+                      <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                      class="carousel-control-next"
+                      type="button"
+                      data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide="next"
+                    >
+                      <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <div class="m-0 mt-2 blockquote" style="color: greenyellow">
+                      <i class="fa-solid fa-location-dot text-danger"></i>
+                      <small id="com_location"></small>
+                      <button
+                        id="view-lands-button"
+                        class="btn btn-outline-light"
+                        style="float: right"
+                      >
+                        View lands
+                      </button>
+                    </div>
+                    <h4 class="text-white mt-0 text-break" id="com_name"></h4>
+                    <span>
+                      <h6 class="mt-3 text-light">
+                        <i class="fa-solid fa-pen-to-square"></i
+                        ><span class="text-decoration-none"> Description</span>
+                      </h6>
+                      <small
+                        class="text-white"
+                        style="text-justify: auto; text-align: justify"
+                        id="com_description"
+                      >
+                      </small
+                      ><br /><br />
+                      <h6 class="text-white text-decoration-underline">
+                        Links
+                      </h6>
+                      <small class="text-primary" id="com_links"></small><br />
+                    </span>
+                  </div>
+                  <div class="col text-white mt-5">
+                    <h5>Videos</h5>
+
+                    <video
+                      id="com_video"
+                      src=""
+                      style="width: 350px; height: fit-content"
+                      controls
+                      autoplay="true"
+                    ></video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="modal fade hide"
+          id="view-lands-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content-dis" style="background-color: black">
+              <div class="modal-header">
+                <h4 class="modal-title" style="color: white" id="myModalLabel">
+                  View lands
+                </h4>
+              </div>
+              <div class="modal-body">
+                <div
+                  id="lands-list"
+                  style="
+                    max-width: 600px;
+                    max-height: 500px;
+                    margin-left: 30px;
+                    overflow-y: auto;
+                    pointer-events: auto;
+                  "
+                  class="lands d-flex flex-wrap"
+                ></div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  style="cursor: pointer"
+                  class="btn btn-outline-light"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <svg id="mapSvg"></svg>
@@ -446,5 +1159,6 @@
     <script src="./states.js"></script>
     <script src="./wallet.js" type="module"></script>
     <script type="module" src="./client.js"></script>
+    <script type="module" src="./SmallGrid.js"></script>
   </body>
 </html>

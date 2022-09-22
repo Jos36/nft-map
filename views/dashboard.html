@@ -501,7 +501,7 @@
                   />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a href="#" class="dropdown-item"
+                  <a href="/profile" class="dropdown-item"
                     ><i class="fa-solid fa-user icon-style"></i
                     ><span>Profile</span></a
                   >
@@ -663,39 +663,237 @@
         </p>
       </nav> -->
     </div>
-    <div class="floating-container-grid mt-5 " style="margin-left:10px;">
-      <div class="small-grid">
-        <div class="center-map">
-          <svg id="mapSvgdash" class="svg-small"></svg>
+    
+     <div class="bottom-divs">
+      <div class="side-bar">
+        <div class="display">
+          <h3 class="text-head-map">MAP</h3>
+          <a href="#">Clear</a>
         </div>
-        <!-- <canvas id="mapSvgSmall" class="mapcanvs"> </canvas> -->
-        <!-- <canvas id="mapSvgSmall" class="mapcanvs">  -->
 
-        <div class="width">
-          <button id="zoom_in" class="smal-grid-button-plus">+</button>
+        <div class="devider">.</div>
 
-          <input type="range" step="0.1" max="1" min="0" class="range" />
+        <div class="display">
+          <h4 class="head-text">Lite Map</h4>
+          <label class="toggle">
+            <input class="toggle-checkbox" type="checkbox" checked />
+            <div class="toggle-switch"></div>
+          </label>
+        </div>
+        <div class="devider">.</div>
 
-          <button class="smal-grid-button-deduct" id="zoom_out">-</button>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">For Sale</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">Premium</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <div class="color-box"></div>
+          <h3 class="text">On OpenSea</h3>
+        </div>
+
+        <div class="devider">.</div>
+
+        <div class="display">
+          <h3 class="text-head ml-1">Find LAND on OpenSea</h3>
+          <i
+            class="fa-solid fa-arrow-up-right-from-square"
+            style="color: white; margin-right: 10px"
+          ></i>
+        </div>
+        <div class="devider">.</div>
+        <h3 class="head-text">SIZE</h3>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">1x1</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">6x6</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">12x12</h3>
+        </div>
+
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <h3 class="text">24x24</h3>
+        </div>
+        <div class="devider">.</div>
+        <h3 class="head-text">CHAIN</h3>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <i class="fa-brands fa-ethereum colored-div"></i>
+          <h3 class="text">Ethereum</h3>
+        </div>
+        <div class="display1">
+          <input type="checkbox" class="check-box" />
+          <!-- <i class="fa-solid fa-vector-polygon colored-div2"></i> -->
+          <!-- <i class="fa-duotone fa-vector-polygon "></i> -->
+          <!-- <i class="fa-duotone fa-link colored-div2"></i> -->
+          <i class="fa-solid fa-draw-polygon colored-div3"></i>
+          <!-- <i class="fa-regular fa-solid fa-vector-polygon colored-div2"></i> -->
+          <h3 class="text">Polygon</h3>
+        </div>
+        <div class="devider">.</div>
+
+        <h3 class="head-text">COORDINATES</h3>
+
+        <div class="row bts">
+          <div class="col-lg-5 offset-1">
+            <p class="text">min (X,Y)</p>
+            <input type="text" class="inputs" />
+          </div>
+          <div class="col-lg-5">
+            <p class="text">min (X,Y)</p>
+            <input type="text" class="inputs" />
+          </div>
+        </div>
+        <div class="row" style="width: 100%">
+          <div class="col-lg-10 offset-1">
+            <button
+              type="button"
+              class="btn btn-info btn-color"
+              style="width: 100%; color: #fff"
+            >
+              apply
+            </button>
+          </div>
+        </div>
+        <div class="devider">.</div>
+
+        <div class="row bts">
+          <div class="col-lg-10 offset-1">
+            <h3 class="head-text">VALLET</h3>
+            <input
+              type="text"
+              class="inputs mr-2"
+              placeholder="EX: 0x785654b67t4b63"
+            />
+          </div>
+        </div>
+        <div class="devider">.</div>
+
+        <div class="row bts">
+          <div class="col-lg-10 offset-1">
+            <h3 class="head-text">PARTNERS</h3>
+            <input
+              type="text"
+              class="input-search mr-3"
+              placeholder="Search a Name"
+            />
+          </div>
+        </div>
+
+        <!-- last menu  -->
+        <div class="row">
+          <div class="col-lg-11 scrol-div">
+            <nav
+              id="sidebarMenu"
+              class="collapse d-lg-block sidebar collapse"
+            >
+              <div class="list-group mx-3 mt-4">
+                <a href="#" class="list-group-itemstyle py-2">
+                  <i class="fas fa-chart-area fa-fw me-3"></i
+                  ><span>Atari </span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-lock fa-fw me-3"></i
+                  ><span>Avenged Sevenfold</span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-line fa-fw me-3"></i
+                  ><span>Analytics</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2">
+                  <i class="fas fa-chart-pie fa-fw me-3"></i
+                  ><span>Binance</span>
+                </a>
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-bar fa-fw me-3"></i
+                  ><span>Care Bears</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-globe fa-fw me-3"></i
+                  ><span>CoinMarketCap</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-building fa-fw me-3"></i
+                  ><span>Deadmau5</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-calendar fa-fw me-3"></i
+                  ><span>Gemini</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-users fa-fw me-3"></i
+                  ><span>Pranksy NFT Boxes</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-money-bill fa-fw me-3"></i
+                  ><span>REVV </span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-calendar fa-fw me-3"></i
+                  ><span>The Smurfs </span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
+                  ><i class="fas fa-chart-bar fa-fw me-3"></i
+                  ><span>Zepeto</span></a
+                >
+              </div>
+            </nav>
+          </div>
         </div>
       </div>
       <div>
-        <div class="togle-show-blue">
-          <i class="fas fa-angle-right icon-togle"></i>
+        <div class="floating-container-grid">
+          <div class="small-grid">
+            <div class="center-map">
+              <svg id="mapSvgdash" class="svg-small"></svg>
+            </div>
+            <!-- <canvas id="mapSvgSmall" class="mapcanvs"> </canvas> -->
+            <!-- <canvas id="mapSvgSmall" class="mapcanvs">  -->
+    
+            <div class="width">
+              <button id="zoom_in" class="smal-grid-button-plus">+</button>
+    
+              <input type="range" step="0.1" max="1" min="0" class="range" />
+    
+              <button class="smal-grid-button-deduct" id="zoom_out">-</button>
+            </div>
+          </div>
+          <div>
+            <div class="togle-show-blue">
+              <i class="fas fa-angle-right icon-togle"></i>
+            </div>
+    
+            <div class="togle-show mt-2">
+              <i class="fa-sharp fa-solid fa-circle-info icon-togle"></i>
+            </div>
+    
+            <div class="togle-show mt-2">
+              <i class="fa-solid fa-list icon-togle"></i>
+            </div>
+          </div>
         </div>
-
-        <div class="togle-show mt-2">
-          <i class="fa-sharp fa-solid fa-circle-info icon-togle"></i>
-        </div>
-
-        <div class="togle-show mt-2">
-          <i class="fa-solid fa-list icon-togle"></i>
-        </div>
+        <div style="background-color: black" id="screenshot">
+          <svg id="mapSvg"></svg>
+        </div> 
       </div>
-    </div>
-      <div style="background-color: black" id="screenshot">
-        <svg id="mapSvg"></svg>
-      </div>
+        
+     </div>
+   
  
     
     <div id="myNav" class="overlay" style="z-index: 999999">

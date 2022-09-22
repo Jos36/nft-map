@@ -94,7 +94,6 @@
       }
       .smal-grid-button-plus {
         position: absolute;
-
         width: 27px;
         height: 20px;
         border: none;
@@ -155,8 +154,255 @@
   </head>
 
   <body id="body">
-    <div class="container-fluid">
-      <div style="height: 80px">
+    <div>
+      <div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+         
+            <a href="#" class="navbar-brand">Explore</a>
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li class="nav-item">
+                  <a href="#" class="navbar-brand">Stats</a>
+                </li>
+  
+                <li class="nav-item dropdown">
+                  <a href="#" class="navbar-brand" data-bs-toggle="dropdown"
+                    >Resources</a
+                  >
+                  <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Helo Center</a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a href="#" class="dropdown-item">Platform Status</a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a href="#" class="dropdown-item">Partners</a>
+  
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">Taxes</a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a href="#" class="dropdown-item">Blog</a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a href="#" class="dropdown-item">Docs</a>
+                    <div class="dropdown-divider"></div>
+  
+                    <a href="#" class="dropdown-item">Newsletter</a>
+  
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                      <div style="display: flex">
+                        <i class="fa-brands fa-twitter icon-sty"></i>
+                        <i class="fa-brands fa-instagram icon-sty"></i>
+                        <i class="fa-brands fa-discord icon-sty"></i>
+  
+                        <i class="fa-brands fa-discord icon-sty"></i>
+                        <i class="fa-brands fa-youtube icon-sty"></i>
+                        <i class="fa-brands fa-tiktok icon-sty"></i>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="navbar-brand">Create</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav ms-auto">
+                <li class="dropdown">
+                  <a
+                    class="d-flex align-items-center hidden-arrow"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                  >
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      class="rounded-circle"
+                      height="30"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end">
+                    <!-- <a href="/profile" class="dropdown-item"
+                      ><i class="fa-solid fa-user icon-style"></i
+                      ><span>Profile</span></a
+                    >
+                    <div class="dropdown-divider"></div> -->
+  
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-regular fa-heart icon-style"></i
+                      ><span>Favorites</span></a
+                    >
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-solid fa-eye icon-style"></i
+                      ><span>Watchlist</span></a
+                    >
+  
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-solid fa-table-cells icon-style"></i
+                      ><span>My Collection</span></a
+                    >
+  
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item"
+                      ><i class="fa-solid fa-gear icon-style"></i
+                      ><span>Settings</span></a
+                    >
+  
+                    <div class="dropdown-divider"></div>
+                    <a href="/login" class="dropdown-item"
+                      ><i
+                        class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
+                      ></i
+                      ><span>Log in</span></a
+                    >
+                    <div class="dropdown-divider"></div>
+                    <a href="/loginregister" class="dropdown-item"
+                      ><i
+                        class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
+                      ></i
+                      ><span>Log in/Register</span></a
+                    >
+                    <div class="dropdown-divider"></div>
+                    <div style="display: flex; margin-right: 10px">
+                      <a href="#" class="dropdown-item"
+                        ><i class="fa-solid fa-moon mood-icon icon-style"></i
+                        ><span>Night Mode</span></a
+                      >
+                      <label class="toggle mt-2">
+                        <input class="toggle-checkbox" type="checkbox" />
+                        <div class="toggle-switch"></div>
+                      </label>
+                    </div>
+                  </div>
+                </li>
+                <li class="dropdown">
+                  <a
+                    class="d-flex align-items-center hidden-arrow"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                  >
+                    <!-- <i class="fa-thin fa-wallet icon-style"></i> -->
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/879/879762.png"
+                      class="icon-dropdown"
+                      height="30"
+                      alt="Black and White Portrait of a Man"
+                    />
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end wallet-div">
+                     <div style="display:flex ;">
+                      <img
+                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      class="rounded-circle mt-1"
+                      height="30"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+                    <h5 class="name-mtz">
+                      THE_METABITZ 
+                    </h5>  
+                    </div>
+                    <div class="dropdown-divider"></div>
+                     <div class="border-div">
+                     <span class="blnce-text">
+                      Total balance 
+                     </span>
+                     <h5 class="balance">
+                      $321.44 USD 
+                     </h5>
+                     <div class="botom-div">
+                      <span>Add Funds</span>
+                     </div>
+                     </div>
+                     <div class="dropdown-divider"></div>
+                        <div class="row border-dic-eth">
+                          <div class="col-lg-1">
+                            <i class="fa-brands fa-ethereum icon-ethc"></i>
+                          </div>
+                          <div class="col-lg-5">
+                            <span  class="blnce-text">ETH</span>
+                            <br/>
+                            <h5>Ethereum</h5>
+                          </div>
+                          <div class="col-lg-5 float-right">
+                            <span  class="blnce-text">0.2041</span>
+                            <br/>
+                            <h5>$321.44 USD</h5>
+                          </div>
+                          <div class="col-lg-1">
+                            <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+                </li>
+              </ul>
+         </nav>
+        <!-- <nav
+          class="navbar navbar-dark fixed-top p-2 pt-4"
+          style="background-color: #000000"
+        >
+          <div class="container-fluid px-5">
+            <a
+              class="navbar-brand p-0"
+              style="
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                  sans-serif;
+                color: #1ceb87;
+                font-size: xx-large;
+                font-weight: bold;
+              "
+              href="/"
+            >
+              <img
+                src="/assets/m2bitzmap.png"
+                style="width: 250px"
+                alt=""
+              /><br />
+            </a>
+            <div class="d-flex gap-5 mt-2">
+              <button class="btn link-light" onclick="reset()">Reset</button>
+              <a href="https://mint.m2bitz.com/" class="btn btn-outline-success"
+                >Mint</a
+              >
+              <a id="connect-button" class="btn btn-outline-success">Connect</a>
+              <a id="profiles-button" class="btn btn-outline-success">Profiles</a>
+              <a id="addTableBtn" class="btn btn-outline-success">Requests</a>
+  
+              <a href="/" class="btn btn-danger">Logout</a>
+            </div>
+          </div>
+          <p
+            style="
+              font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                sans-serif;
+              color: red;
+              font-size: x-large;
+              font-weight: bold;
+              padding-left: 100px;
+            "
+          >
+            Admin Panel
+          </p>
+        </nav> -->
+      </div>
+      <!-- <div style="height: 80px">
         <nav
           class="navbar navbar-dark fixed-top p-2 pt-4"
           style="background-color: #000000"
@@ -185,7 +431,6 @@
               <a href="https://mint.m2bitz.com/" class="btn btn-outline-success"
                 >Mint</a
               >
-              <a id="connect-button" class="btn btn-outline-success">Connect</a>
               <a href="/login" class="btn btn-outline-success">Login</a>
               <a href="/loginregister" class="btn btn-outline-success"
                 >Login register</a
@@ -193,7 +438,7 @@
             </div>
           </div>
         </nav>
-      </div>
+      </div> -->
       <div class="bottom-divs">
         <!-- <button id="test">abcd</button> -->
         <!-- <canvas></canvas> -->
