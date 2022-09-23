@@ -188,6 +188,11 @@ function grid() {
   function handleZoom(e) {
     console.log("called");
     if (
+      localStorage.getItem("range") === undefined ||
+      localStorage.getItem("range") === null
+    )
+      localStorage.setItem("range", 0);
+    if (
       e.transform.x === parseFloat(69.12001037597656) &&
       e.transform.y === parseFloat(37.46112408701579)
     ) {
@@ -201,6 +206,91 @@ function grid() {
     //
     //
   }
+
+  d3.selectAll("#range").on("mousedown", function () {
+    console.log("wqer");
+  });
+  d3.selectAll("#range").on("mouseup", function (event) {
+    if (
+      parseInt(localStorage.getItem("range")) <
+      document.getElementById("range").value
+    ) {
+      localStorage.setItem("range", document.getElementById("range").value);
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) - parseFloat(0.01)) +
+          ")"
+      );
+
+      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
+      let values1 = transform1
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values1[0]) - parseFloat(20)) +
+          ", " +
+          (parseFloat(values1[1]) - parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values1[2]) - parseFloat(0.01)) +
+          ")"
+      );
+    } else {
+      localStorage.setItem("range", document.getElementById("range").value);
+      let transform = d3.select("svg#mapSvg > g").attr("transform");
+      let values = transform
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      d3.select("svg#mapSvg > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(values[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values[2]) + parseFloat(0.01)) +
+          ")"
+      );
+      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
+      console.log(transform1);
+      let values1 = transform1
+        .replace(/[^0-9., ]/g, "")
+        .split(/[ ,]+/)
+        .join(",")
+        .split(",");
+      // zoom.scaleBy(grid.transition(), 4);
+      console.log(values1);
+      d3.select("svg#mapSvgSmall > g").attr(
+        "transform",
+        "translate(" +
+          (parseFloat(values1[0]) + parseFloat(20)) +
+          ", " +
+          (parseFloat(values1[1]) + parseFloat(20)) +
+          ") scale(" +
+          (parseFloat(values1[2]) + parseFloat(0.01)) +
+          ")"
+      );
+    }
+  });
 
   //
 
