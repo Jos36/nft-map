@@ -1,5 +1,5 @@
 /** @format */
-import { addUser, checkUser, modifiyUser } from "./api.js ";
+import { addUser, checkUser, modifiyUser, getUserNfts } from "./api.js ";
 import { verifyWalletConnection } from "./wallet.js";
 
 document.querySelector("input").focus();
@@ -17,7 +17,7 @@ async function grid() {
       if (data) {
         console.log(data);
         console.log("wallet connection verified");
-        checkForUser().then((user) => {
+        checkForUser().then(async (user) => {
           console.log(user);
           if (user) {
             if (user.length === 0) {
@@ -37,173 +37,220 @@ async function grid() {
                 whatKindOfServiceYouOffer,
                 type,
                 wallet,
+                watchlist,
+                favorite,
+                image,
               } = user[0];
+              const navimage = document.getElementById("navImage");
+              navimage.src = image;
               info.innerHTML = `<div id="profile-body" class="hidden">
               
         
               <div class="container emp-profile">
-                <div >
-                  <div class="row">
-                    <div class="col-md-10">
-                      <div class="profile-head">
-                        <h5 style="color: white">${name}</h5>
-                        <h6>${company}</h6>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <button
-                        id="edit"
-                        class="profile-edit-btn"
-                       
-                      >Edit Profile</button>
-                    </div>
-                    <div class="col-md-8 spliter"></div>
-                  </div>
-                  <div class="row">
-                    <div class="">
-                      <div
-                        class="tab-content profile-tab"
-                        id="myTabContent"
-                        style="margin-top: 70px"
-                      >
-                        <div
-                          class="tab-pane fade show active"
-                          id="home"
-                          role="tabpanel"
-                          aria-labelledby="home-tab"
-                        >
-                          <div class="row">
-                            <div class="col-md-8">
-                              <label>Name</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${name}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8" >
-                              <label>Username</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${username}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Email</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${email}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Location</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${location}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Company</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${company}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Role</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${role}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Website</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <a href="${website}">${website}</a>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Bio</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${bio}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Looking for</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${whatAreYouLookingFor}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Intersted in</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${whatTopicsAreYouInterestedIn}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Service you offer</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${whatKindOfServiceYouOffer}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Intersted Topics for you</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${whatTopicsAreYouInterestedIn}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Account Type</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${type}</p>
-                            </div>
-                          </div>
-                          <div class="row col-md-8 split"></div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-md-8">
-                              <label>Your wallet address</label>
-                            </div>
-                            <div class="col-md-4 d-flex flex-row-reverse">
-                              <p>${wallet}</p>
-                            </div>
-                          </div>
+                  <div class="profile__container">
+                    <div class="leftPanel">
+                      <div class="leftPanel__container">
+                        <div class="leftPanel__container__top">
+                          <p id="name" class="text-muted m-0 text-center">${username}</p>
+                        
+                          <img src="${image}" class="rounded-circle shadow-4"
+                          style="width: 120px;margin-top:20px;margin-bottom:20px" alt="Avatar" />
+                          <h5 id="name" class="text-white m-0 text-center font-bold">${name}</h4>
                         </div>
+                          <div>
+                           <button
+                             id="edit"
+                            class="profile-edit-btn"
+                            >Edit Profile</button>
+                         </div>
                       </div>
                     </div>
+                    <div class="rightPanel">
+                      <div class="rightPanel__top">
+                      <p id="about" class="text-white m-0" style="cursor:pointer;">About</p>
+                      <p id="watchlist" class="text-white m-0" style="cursor:pointer;">Watchlist</p>
+                      <p id="favorite" class="text-white m-0" style="cursor:pointer;">Favorite</p>
+                      <p id="nfts" class="text-white m-0" style="cursor:pointer;">NFTs</p>
+                      </div>
+                      <div id="rightPanel__bottom" class="rightPanel__bottom">
+                       <div style="padding:40px;display:flex; justify-content: space-between;">
+                              <div>
+                                <h5 id="username" class="text-white m-0">
+                                  Username
+                                </h5>
+                                <p id="username" class="text-muted m-0 mb-3">
+                                  ${username}
+                                </p>
+                                <h5 class="text-white m-0">Name</h5>
+                                <p class="text-muted m-0 mb-3">${name}</p>
+                                <h5 class="text-white m-0">Email</h5>
+                                <p class="text-muted m-0 mb-3">${email}</p>
+                                <h5 class="text-white m-0">Location</h5>
+                                <p class="text-muted m-0 mb-3">${location}</p>
+                                <h5 class="text-white m-0">Company</h5>
+                                <p class="text-muted m-0 mb-3">${company}</p>
+                                <h5 class="text-white m-0">Role</h5>
+                                <p class="text-muted m-0 mb-3">${role}</p>
+                                <h5 class="text-white m-0">Website</h5>
+                                <p class="text-muted m-0 mb-3">${website}</p>
+                              </div>
+                              <div>
+                                <h5 class="text-white m-0">Bio</h5>
+                                <p class="text-muted m-0 mb-3">${bio}</p>
+                                <h5 class="text-white m-0">Looking for</h5>
+                                <p class="text-muted m-0 mb-3">
+                                  ${whatAreYouLookingFor}
+                                </p>
+                                <h5 class="text-white m-0">Intersted in</h5>
+                                <p class="text-muted m-0 mb-3">
+                                  ${whatTopicsAreYouInterestedIn}
+                                </p>
+                                <h5 class="text-white m-0">
+                                  Service you offer
+                                </h5>
+                                <p class="text-muted m-0 mb-3">
+                                  ${whatKindOfServiceYouOffer}
+                                </p>
+                                <h5 class="text-white m-0">
+                                  Intersted Topics for you
+                                </h5>
+                                <p class="text-muted m-0 mb-3">
+                                  ${whatTopicsAreYouInterestedIn}
+                                </p>
+                                <h5 class="text-white m-0">Account Type</h5>
+                                <p class="text-muted m-0 mb-3">${type}</p>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                    
                   </div>
-                </div>
+                  
               </div>
             </div>`;
+
+              const rightPanel__bottom =
+                document.getElementById("rightPanel__bottom");
+              const aboutTab = document.getElementById("about");
+              aboutTab.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                rightPanel__bottom.innerHTML = `
+                <div style="padding:40px;display:flex; justify-content: space-between;">
+                       <div>
+                         <h5 id="username" class="text-white m-0">
+                           Username
+                         </h5>
+                         <p id="username" class="text-muted m-0 mb-3">
+                           ${username}
+                         </p>
+                         <h5 class="text-white m-0">Name</h5>
+                         <p class="text-muted m-0 mb-3">${name}</p>
+                         <h5 class="text-white m-0">Email</h5>
+                         <p class="text-muted m-0 mb-3">${email}</p>
+                         <h5 class="text-white m-0">Location</h5>
+                         <p class="text-muted m-0 mb-3">${location}</p>
+                         <h5 class="text-white m-0">Company</h5>
+                         <p class="text-muted m-0 mb-3">${company}</p>
+                         <h5 class="text-white m-0">Role</h5>
+                         <p class="text-muted m-0 mb-3">${role}</p>
+                         <h5 class="text-white m-0">Website</h5>
+                         <p class="text-muted m-0 mb-3">${website}</p>
+                       </div>
+                       <div>
+                         <h5 class="text-white m-0">Bio</h5>
+                         <p class="text-muted m-0 mb-3">${bio}</p>
+                         <h5 class="text-white m-0">Looking for</h5>
+                         <p class="text-muted m-0 mb-3">
+                           ${whatAreYouLookingFor}
+                         </p>
+                         <h5 class="text-white m-0">Intersted in</h5>
+                         <p class="text-muted m-0 mb-3">
+                           ${whatTopicsAreYouInterestedIn}
+                         </p>
+                         <h5 class="text-white m-0">
+                           Service you offer
+                         </h5>
+                         <p class="text-muted m-0 mb-3">
+                           ${whatKindOfServiceYouOffer}
+                         </p>
+                         <h5 class="text-white m-0">
+                           Intersted Topics for you
+                         </h5>
+                         <p class="text-muted m-0 mb-3">
+                           ${whatTopicsAreYouInterestedIn}
+                         </p>
+                         <h5 class="text-white m-0">Account Type</h5>
+                         <p class="text-muted m-0 mb-3">${type}</p>
+                       </div>
+                     </div>
+               </div>`;
+              });
+
+              // get nfts for the tab
+              const nfts = await getUserNfts(window.accountData.account);
+              console.log(nfts);
+
+              // tabs functionality
+              const watchlistTab = document.getElementById("watchlist");
+              watchlistTab.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                rightPanel__bottom.innerHTML = `<div style="padding:40px;">
+                <h5 class="text-white m-0 mb-4">
+                Watchlist Lands
+                </h5>
+                <div style="display:flex;  width:100%; flex-wrap: wrap;">
+                ${watchlist.map(
+                  (item) => `
+                  <h6 class="text-white p-2 m-1" style="border: 1px solid white; border-radius:15px;">${item}</h6>
+                  `
+                )}
+                  </div>
+                  </div>`;
+              });
+
+              const favoriteTab = document.getElementById("favorite");
+              favoriteTab.addEventListener("click", (e) => {
+                e.preventDefault();
+                rightPanel__bottom.innerHTML = `<div style="padding:40px;">
+                <h5 class="text-white m-0 mb-4">
+                Favorite Lands
+                </h5>
+                <div style="display:flex;  width:100%; flex-wrap: wrap;">
+                ${favorite.map(
+                  (item) => `
+                  <h6 class="text-white p-2 m-1" style="border: 1px solid white; border-radius:15px;">${item}</h6>
+                  `
+                )}
+                  </div>
+                  </div>`;
+              });
+
+              const nftsTab = document.getElementById("nfts");
+              nftsTab.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                rightPanel__bottom.innerHTML = `<div style="padding:40px;overflow-y:scroll;height:100%">
+                <h5 class="text-white m-0 mb-4">
+                Collection
+                </h5>
+                <div style="width:100%;">
+                ${nfts.data.result
+                  .map((item) => {
+                    return `<h6 class="text-white p-2" style="width:100%; border: 1px solid white; border-radius:15px;">${item}</h6>`;
+                  })
+                  .join("")}
+                  </div>
+                  </div>`;
+              });
+
+              if (window.location.hash === "#favorite") favoriteTab.click();
+              if (window.location.hash === "#watchlist") watchlistTab.click();
+              if (window.location.hash === "#nfts") nftsTab.click();
+              if (window.location.hash === "#about") aboutTab.click();
+
+              // some code i don't remember
               document.getElementById("clientLoader").classList.add("hidden");
               document
                 .getElementById("profile-body")
@@ -298,6 +345,16 @@ async function grid() {
     class="form-control form-control-sm"
     id="username"
   />
+</div>
+<div class="mb-2">
+<label for="" class="form-label">Profile image</label>
+<input
+  type="file"
+  required
+  name="logo"
+  class="form-control form-control-sm"
+  id="logo"
+/>
 </div>
 <div class="mb-2">
   <label for="" class="form-label">Email</label>
@@ -430,6 +487,16 @@ async function grid() {
     class="form-control form-control-sm"
     id="username"
   />
+</div>
+<div class="mb-2">
+<label for="" class="form-label">Profile image</label>
+<input
+  type="file"
+  required
+  name="logo"
+  class="form-control form-control-sm"
+  id="logo"
+/>
 </div>
 <div class="mb-2">
   <label for="" class="form-label">Email</label>

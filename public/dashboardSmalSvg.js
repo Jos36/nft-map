@@ -102,196 +102,52 @@ function grid() {
     }
   }
 
+  function handleZoom(e) {
+    d3.select("svg#mapSvg > g").attr("transform", e.transform);
+    d3.select("svg#mapSvgSmall > g").attr("transform", e.transform);
+  }
+
   const zoom = d3.zoom().on("zoom", handleZoom);
   let scroller = document.querySelector("#mapSvgdash");
 
   scroller.addEventListener("wheel", function (event) {
-    console.log(event.wheelDelta);
-
-    if (event.wheelDelta < 0) {
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      console.log(transform);
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      console.log(values);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) - parseFloat(0.01)) +
-          ")"
-      );
-      console.log(d3.select("svg#mapSvg > g").attr("transform"));
-
-      let transform1 = d3.select("svg#mapSvgdash > g").attr("transform");
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) - parseFloat(0.01)) +
-          ")"
-      );
+    if (event.wheelDelta > 0) {
+      const grid = d3.select("svg#mapSvg");
+      const zoom = d3.zoom().on("zoom", handleZoom);
+      grid.call(zoom.scaleBy, 1.5);
     } else {
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) + parseFloat(0.01)) +
-          ")"
-      );
-
-      let transformS = d3.select("svg#mapSvgdash > g").attr("transform");
-      let valuesS = transformS
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(valuesS[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(valuesS[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(valuesS[2]) + parseFloat(0.01)) +
-          ")"
-      );
+      const grid = d3.select("svg#mapSvg");
+      const zoom = d3.zoom().on("zoom", handleZoom);
+      grid.call(zoom.scaleBy, 0.5);
     }
   });
-  function handleZoom(e) {
-    console.log("called");
-    console.log("abd ", e.transform.y);
-    if (
-      e.transform.x === parseFloat(69.1199951171875) &&
-      e.transform.y === parseFloat(37.46112413533529)
-    ) {
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" + 270 + ", " + 120 + ") scale(" + 0.1 + ")"
-      );
-    }
-    // jQuery.selectAll("#range").sortable();
 
-    // }
-
-    //
-    //
-  }
   d3.selectAll("#range").on("click", function () {
     console.log("wqer");
   });
   d3.selectAll("#range").on("mouseup", function (event) {
-    if (
-      parseInt(localStorage.getItem("range")) <
-      document.getElementById("range").value
-    ) {
-      localStorage.setItem("range", document.getElementById("range").value);
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) - parseFloat(0.01)) +
-          ")"
-      );
-
-      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvgSmall > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) - parseFloat(0.01)) +
-          ")"
-      );
-    } else {
-      localStorage.setItem("range", document.getElementById("range").value);
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) + parseFloat(0.01)) +
-          ")"
-      );
-      let transform1 = d3.select("svg#mapSvgSmall > g").attr("transform");
-      console.log(transform1);
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      console.log(values1);
-      d3.select("svg#mapSvgSmall > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) + parseFloat(0.01)) +
-          ")"
-      );
+    const grid = d3.select("svg#mapSvg");
+    const zoom = d3.zoom().on("zoom", handleZoom);
+    if (document.getElementById("range").value == 0) {
+      grid.call(zoom.scaleTo, 0.5);
+    }
+    if (document.getElementById("range").value == 1) {
+      grid.call(zoom.scaleTo, 0.4);
+    }
+    if (document.getElementById("range").value == 2) {
+      grid.call(zoom.scaleTo, 0.2);
+    }
+    if (document.getElementById("range").value == 3) {
+      grid.call(zoom.scaleTo, 0.1);
+    }
+    if (document.getElementById("range").value == 4) {
+      grid.call(zoom.scaleTo, 0.06);
+    }
+    if (document.getElementById("range").value == 5) {
+      grid.call(zoom.scaleTo, 0.04);
     }
   });
 
-  //
-
-  //
   const createStates = (number) => {
     const stateRect = {};
     const t = [];
@@ -416,122 +272,15 @@ function grid() {
       });
 
     d3.selectAll("#zoom_in").on("click", function () {
-      console.log("this is plus button");
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) + parseFloat(0.01)) +
-          ")"
-      );
-      let transform1 = d3.select("svg#mapSvgdash > g").attr("transform");
-      console.log(transform1);
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      console.log(values1);
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) + parseFloat(0.01)) +
-          ")"
-      );
-    });
-
-    d3.selectAll("#range").on("dragstart", function () {
-      console.log("range");
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) + parseFloat(0.01)) +
-          ")"
-      );
-      let transform1 = d3.select("svg#mapSvgdash > g").attr("transform");
-      console.log(transform1);
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      console.log(values1);
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) + parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) + parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) + parseFloat(0.01)) +
-          ")"
-      );
+      const grid = d3.select("svg#mapSvg");
+      const zoom = d3.zoom().on("zoom", handleZoom);
+      grid.call(zoom.scaleBy, 1.5);
     });
 
     d3.selectAll("#zoom_out").on("click", function () {
-      console.log("this is - button");
-      let transform = d3.select("svg#mapSvg > g").attr("transform");
-      let values = transform
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvg > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values[2]) - parseFloat(0.01)) +
-          ")"
-      );
-
-      let transform1 = d3.select("svg#mapSvgdash > g").attr("transform");
-      let values1 = transform1
-        .replace(/[^0-9., ]/g, "")
-        .split(/[ ,]+/)
-        .join(",")
-        .split(",");
-      // zoom.scaleBy(grid.transition(), 4);
-      d3.select("svg#mapSvgdash > g").attr(
-        "transform",
-        "translate(" +
-          (parseFloat(values1[0]) - parseFloat(20)) +
-          ", " +
-          (parseFloat(values1[1]) - parseFloat(20)) +
-          ") scale(" +
-          (parseFloat(values1[2]) - parseFloat(0.01)) +
-          ")"
-      );
+      const grid = d3.select("svg#mapSvg");
+      const zoom = d3.zoom().on("zoom", handleZoom);
+      grid.call(zoom.scaleBy, 0.5);
     });
 
     // for drawing rect squares instead of images
@@ -604,33 +353,6 @@ function grid() {
         return 24 * factor;
       });
 
-    // group24
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 2.5 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 11.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "450px")
-    //   .text(function (d) {
-    //     return "Available";
-    //   });
-
-    // group24
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 7 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 15.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "350px")
-    //   .text(function (d) {
-    //     return "24x24";
-    //   });
     const group12 = grid
       .select("g")
       .selectAll(".square12")

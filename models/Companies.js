@@ -48,6 +48,18 @@ const Schema = new mongoose.Schema(
     requestedLinks: {
       type: [String],
     },
+    forSale: {
+      type: Boolean,
+    },
+    premium: {
+      type: Boolean,
+    },
+    onOpensea: {
+      type: Boolean,
+    },
+    blockchain: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

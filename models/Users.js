@@ -42,6 +42,15 @@ const Schema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    favorite: {
+      type: [String],
+    },
+    watchlist: {
+      type: [String],
+    },
+    image: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

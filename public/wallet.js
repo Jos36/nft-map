@@ -134,8 +134,8 @@ const initialize = () => {
       //   connectButton.disabled = false;
       // } else {
       // connectButton.innerText = "Connect";
-      connectButton.onclick = connectWallet;
-      connectButton.disabled = false;
+      // connectButton.onclick = connectWallet;
+      // connectButton.disabled = false;
       // }
     }
   };

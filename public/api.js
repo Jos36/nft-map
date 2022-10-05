@@ -151,13 +151,47 @@ export async function get(context) {
   return companies;
 }
 
-function loadData() {
+function loadData(coord) {
   if (companies.length > 0) {
     companies.forEach((company) => {
       coordinates[company.coordinates] = company;
     });
   }
   console.log(coordinates);
+}
+
+export async function addFavorite(coord, wallet) {
+  const res = await fetch(`/api/addFavorite?coord=${coord}&wallet=${wallet}`, {
+    method: "GET",
+    headers: {
+      accept: "application/json;",
+    },
+  });
+  let dataa = await res.json();
+  console.log(dataa);
+}
+
+export async function addWatchlist(coord, wallet) {
+  const res = await fetch(`/api/addWatchlist?coord=${coord}&wallet=${wallet}`, {
+    method: "GET",
+    headers: {
+      accept: "application/json;",
+    },
+  });
+  let dataa = await res.json();
+  console.log(dataa);
+}
+
+export async function getUserNfts(address) {
+  const res = await fetch(`/api/getNFTs?address=${address}`, {
+    method: "GET",
+    headers: {
+      accept: "application/json;",
+    },
+  });
+  let dataa = await res.json();
+  console.log(dataa);
+  return dataa;
 }
 
 function logout(e) {

@@ -73,6 +73,7 @@ router.post("/addUser", async (req, res) => {
       whatKindOfServiceYouOffer: req.body.whatKindOfServiceYouOffer,
       type: req.body.type,
       wallet: req.body.wallet,
+      image: `/images/${req.files.logo[0].filename}`,
     };
     console.log(data);
 
@@ -88,6 +89,7 @@ router.post("/modifiyUser", async (req, res) => {
   try {
     console.log("modifying User");
     await uploadFile(req, res);
+    console.log("modifying User");
 
     const data = {
       name: req.body.name,
@@ -103,6 +105,7 @@ router.post("/modifiyUser", async (req, res) => {
       whatKindOfServiceYouOffer: req.body.whatKindOfServiceYouOffer,
       type: req.body.type,
       wallet: req.body.wallet,
+      image: `/images/${req.files.logo[0].filename}`,
     };
     console.log(data);
 
@@ -306,6 +309,50 @@ router.post("/reject", verify, async (req, res) => {
     console.log(error);
     return res.status(500).json(error.message);
   }
+});
+
+router.get("/addWatchlist", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  const wallet = req.query.wallet;
+  const coord = req.query.coord;
+  const user = await Users.find({ wallet });
+
+  if (user[0].watchlist) {
+    if (!user[0].watchlist.includes(coord)) {
+      await Users.updateOne(
+        { wallet },
+        { watchlist: [...user[0].watchlist, coord] },
+        { upsert: true }
+      );
+    }
+  } else {
+    await Users.updateOne({ wallet }, { watchlist: [coord] }, { upsert: true });
+  }
+
+  res.status(200).json({ success: true });
+});
+
+router.get("/addFavorite", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  const wallet = req.query.wallet;
+  const coord = req.query.coord;
+  const user = await Users.find({ wallet });
+
+  if (user[0].favorite) {
+    if (!user[0].favorite.includes(coord)) {
+      await Users.updateOne(
+        { wallet },
+        { favorite: [...user[0].favorite, coord] },
+        { upsert: true }
+      );
+    }
+  } else {
+    await Users.updateOne({ wallet }, { favorite: [coord] }, { upsert: true });
+  }
+
+  res.status(200).json({ success: true });
 });
 
 module.exports = router;

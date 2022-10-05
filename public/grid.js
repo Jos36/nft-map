@@ -1,5 +1,7 @@
 /** @format */
 import { get } from "./api.js ";
+import { statessHead6, statessHead12, statessHead24 } from "./statess.js";
+
 function grid() {
   const d3 = window.d3;
   const factor = 100;
@@ -296,7 +298,6 @@ function grid() {
   //   zoom.scaleBy(mapSvg, 1 / 1.3);
   // });
 
-  //TODO: separate d3 functions
   function drawGrid() {
     const grid = d3
       .select("#mapSvg")
@@ -401,33 +402,6 @@ function grid() {
         return 24 * factor;
       });
 
-    // group24
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 2.5 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 11.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "450px")
-    //   .text(function (d) {
-    //     return "Available";
-    //   });
-
-    // group24
-    //   .append("text")
-    //   .attr("x", function (d) {
-    //     return d[0] * factor + 7 * factor;
-    //   })
-    //   .attr("y", function (d) {
-    //     return d[1] * factor + 15.5 * factor;
-    //   })
-    //   .style("fill", "white")
-    //   .style("font-size", "350px")
-    //   .text(function (d) {
-    //     return "24x24";
-    //   });
     const group12 = grid
       .select("g")
       .selectAll(".square12")
@@ -499,26 +473,199 @@ function grid() {
         return 6 * factor;
       });
   }
-
-  function delay(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-
-  // jQuery("#closebtn").click((e) => {
-  //   video.pause();
-  //   document.getElementById("myNav").style.width = "0%";
-  // });
-
-  // jQuery("#view-lands-button").click((e) => {
-  //   video.pause();
-  //   var landsModal = new bootstrap.Modal(
-  //     document.getElementById("view-lands-modal")
-  //   );
-  //   landsModal.show();
-  // });
-  // draw grid for the first time
   drawGrid();
   reset();
+
+  const selectAll1 = () => {
+    d3.select("svg#mapSvg")
+      .select("g")
+      .selectAll(".square")
+      .style("fill", "#FF69B4");
+  };
+  const deSelectAll1 = () => {
+    d3.select("svg#mapSvg")
+      .select("g")
+      .selectAll(".square")
+      .style("fill", "#04e38b");
+  };
+  const selectAll6 = () => {
+    statessHead6.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+    });
+  };
+  const deSelectAll6 = () => {
+    statessHead6.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+    });
+  };
+  const selectAll12 = () => {
+    statessHead12.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "30");
+      d3.select(land._groups[0][3]).style("stroke-width", "30");
+    });
+  };
+  const deSelectAll12 = () => {
+    statessHead12.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
+    });
+  };
+  const selectAll24 = () => {
+    statessHead24.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "30");
+      d3.select(land._groups[0][3]).style("stroke-width", "30");
+    });
+  };
+  const deSelectAll24 = () => {
+    statessHead24.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
+    });
+  };
+
+  // forsale filter
+  const selectForSale = document.getElementById("selectForSale");
+  selectForSale.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+    } else {
+      deSelectAll1();
+    }
+  });
+
+  // premuim filter
+  const selectPremium = document.getElementById("selectPremium");
+  selectPremium.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll24();
+    } else {
+      deSelectAll24();
+    }
+  });
+
+  // onOpensea filter
+  const selectOpensea = document.getElementById("selectOpensea");
+  selectOpensea.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+      selectAll6();
+      selectAll12();
+      selectAll24();
+    } else {
+      deSelectAll1();
+      deSelectAll6();
+      deSelectAll12();
+      deSelectAll24();
+    }
+  });
+
+  // select1 filter
+  const select1 = document.getElementById("select1");
+  select1.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+    } else {
+      deSelectAll1();
+    }
+  });
+
+  // select6 filter
+  const select6 = document.getElementById("select6");
+  select6.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll6();
+    } else {
+      deSelectAll6();
+    }
+  });
+
+  // select12 filter
+  const select12 = document.getElementById("select12");
+  select12.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll12();
+    } else {
+      deSelectAll12();
+    }
+  });
+
+  // select24 filter
+  const select24 = document.getElementById("select24");
+  select24.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll24();
+    } else {
+      deSelectAll24();
+    }
+  });
+
+  // eth filter
+  const selectEth = document.getElementById("selectEth");
+  selectEth.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+      selectAll6();
+      selectAll12();
+      selectAll24();
+    } else {
+      deSelectAll1();
+      deSelectAll6();
+      deSelectAll12();
+      deSelectAll24();
+    }
+  });
+
+  // selectCoord
+  const selectCoord = document.getElementById("applySelectXY");
+  selectCoord.addEventListener("click", (e) => {
+    deSelectAll1();
+    const grid = d3.select("svg#mapSvg");
+    const x = document.getElementById("selectX").value;
+    const y = document.getElementById("selectY").value;
+    const container = grid.node().getBoundingClientRect();
+    const width = container.width;
+    const height = container.height;
+    const start = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(0.4)
+      .translate(-x * 100, -y * 100);
+    zoom.transform(grid, start);
+    grid.call(zoom.transform, start);
+    let t = d3.selectAll(`rect[x='${x * 100}'][y='${y * 100}']`);
+    d3.select(t._groups[0][1]).style("fill", "#FF69B4");
+  });
+
   // fetch data and draw images
 
   get().then((res) => {

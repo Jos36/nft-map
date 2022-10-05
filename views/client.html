@@ -154,7 +154,6 @@
         background: #1b2026;
         max-height: 92vh !important;
         overflow-y: auto !important;
-        /* margin-top: 51px; */
       }
     </style>
   </head>
@@ -296,7 +295,7 @@
     <div>
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container-fluid">
-          <a href="#" class="navbar-brand">Explore</a>
+          <a href="/client" class="navbar-brand">Explore</a>
           <button
             type="button"
             class="navbar-toggler"
@@ -316,27 +315,29 @@
                   >Resources</a
                 >
                 <div class="dropdown-menu">
-                  <a href="#" class="dropdown-item">Helo Center</a>
+                  <a href="https://themetabitz.com/faq-es/" class="dropdown-item">Helo Center</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="https://themetabitz.com/blog/" class="dropdown-item">Blog</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="https://themetabitz.com" class="dropdown-item">About</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a href="https://cbztoken.com/whitepaper/" class="dropdown-item">Docs</a>
+                  <div class="dropdown-divider"></div>
+
+                  <a href="https://cbztoken.com" class="dropdown-item">Cbz Token</a>
                   <div class="dropdown-divider"></div>
 
                   <a href="#" class="dropdown-item">Platform Status</a>
+                  <a href="#" class="dropdown-item" style="display: flex; justify-content: center;">
+
+                    <button class=" btn btn-success" style="border-radius: 15px;">Online</button>
+                  </a>
                   <div class="dropdown-divider"></div>
 
-                  <a href="#" class="dropdown-item">Partners</a>
 
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">Taxes</a>
-                  <div class="dropdown-divider"></div>
-
-                  <a href="#" class="dropdown-item">Blog</a>
-                  <div class="dropdown-divider"></div>
-
-                  <a href="#" class="dropdown-item">Docs</a>
-                  <div class="dropdown-divider"></div>
-
-                  <a href="#" class="dropdown-item">Newsletter</a>
-
-                  <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item">
                     <div style="display: flex">
                       <i class="fa-brands fa-twitter icon-sty"></i>
@@ -351,7 +352,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a href="#" class="navbar-brand">Create</a>
+                <a href="https://mint.m2bitz.com/" class="navbar-brand">Mint</a>
               </li>
             </ul>
             <ul class="nav navbar-nav ms-auto">
@@ -364,11 +365,12 @@
                   data-bs-toggle="dropdown"
                 >
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src=""
                     class="rounded-circle"
                     height="30"
                     alt="Black and White Portrait of a Man"
                     loading="lazy"
+                    id="navImage"
                   />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -378,24 +380,24 @@
                   >
                   <div class="dropdown-divider"></div>
 
-                  <a href="#" class="dropdown-item"
+                  <a href="/profile#favorites" class="dropdown-item"
                     ><i class="fa-regular fa-heart icon-style"></i
                     ><span>Favorites</span></a
                   >
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item"
+                  <a href="/profile#watchlist" class="dropdown-item"
                     ><i class="fa-solid fa-eye icon-style"></i
                     ><span>Watchlist</span></a
                   >
 
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item"
+                  <a href="/profile#nfts" class="dropdown-item"
                     ><i class="fa-solid fa-table-cells icon-style"></i
                     ><span>My Collection</span></a
                   >
 
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item"
+                  <a href="/profile" class="dropdown-item"
                     ><i class="fa-solid fa-gear icon-style"></i
                     ><span>Settings</span></a
                   >
@@ -589,36 +591,26 @@
       </nav>
     </div> -->
     <div class="bottom-divs">
-      <div class="side-bar">
+      <div class="side-bar 	d-none d-lg-block d-xl-block d-md-block">
         <div class="display">
           <h3 class="text-head-map">MAP</h3>
           <a href="#">Clear</a>
         </div>
-
-        <div class="devider">.</div>
-
-        <div class="display">
-          <h4 class="head-text">Lite Map</h4>
-          <label class="toggle">
-            <input class="toggle-checkbox" type="checkbox" checked />
-            <div class="toggle-switch"></div>
-          </label>
-        </div>
         <div class="devider">.</div>
 
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="selectForSale" />
           <div class="color-box"></div>
           <h3 class="text">For Sale</h3>
         </div>
-        <div class="display1">
-          <input type="checkbox" class="check-box" />
+        <div class="display1" >
+          <input type="checkbox" class="check-box" id="selectPremium" />
           <div class="color-box"></div>
           <h3 class="text">Premium</h3>
         </div>
 
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="selectOpensea"/>
           <div class="color-box"></div>
           <h3 class="text">On OpenSea</h3>
         </div>
@@ -636,27 +628,27 @@
         <h3 class="head-text">SIZE</h3>
 
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box"  id="select1"/>
           <h3 class="text">1x1</h3>
         </div>
 
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="select6" />
           <h3 class="text">6x6</h3>
         </div>
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="select12" />
           <h3 class="text">12x12</h3>
         </div>
 
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="select24" />
           <h3 class="text">24x24</h3>
         </div>
         <div class="devider">.</div>
         <h3 class="head-text">CHAIN</h3>
         <div class="display1">
-          <input type="checkbox" class="check-box" />
+          <input type="checkbox" class="check-box" id="selectEth"/>
           <i class="fa-brands fa-ethereum colored-div"></i>
           <h3 class="text">Ethereum</h3>
         </div>
@@ -675,12 +667,12 @@
 
         <div class="row bts">
           <div class="col-lg-5 offset-1">
-            <p class="text">min (X,Y)</p>
-            <input type="text" class="inputs" />
+            <p class="text">X</p>
+            <input type="text" class="inputs" id="selectX" />
           </div>
           <div class="col-lg-5">
-            <p class="text">min (X,Y)</p>
-            <input type="text" class="inputs" />
+            <p class="text">Y</p>
+            <input type="text" class="inputs" id="selectY"/>
           </div>
         </div>
         <div class="row" style="width: 100%">
@@ -689,6 +681,7 @@
               type="button"
               class="btn btn-info btn-color"
               style="width: 100%; color: #fff"
+              id="applySelectXY"
             >
               apply
             </button>
@@ -698,11 +691,12 @@
 
         <div class="row bts">
           <div class="col-lg-10 offset-1">
-            <h3 class="head-text">VALLET</h3>
+            <h3 class="head-text">WALLET</h3>
             <input
               type="text"
               class="inputs mr-2"
               placeholder="EX: 0x785654b67t4b63"
+              id="selectWallet"
             />
           </div>
         </div>
@@ -715,6 +709,7 @@
               type="text"
               class="input-search mr-3"
               placeholder="Search a Name"
+              id="selectPartners"
             />
           </div>
         </div>
@@ -722,7 +717,10 @@
         <!-- last menu  -->
         <div class="row">
           <div class="col-lg-11 scrol-div">
-            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
+            <nav
+              id="sidebarMenu"
+              class="collapse d-lg-block sidebar collapse"
+            >
               <div class="list-group mx-3 mt-4">
                 <a href="#" class="list-group-itemstyle py-2">
                   <i class="fas fa-chart-area fa-fw me-3"></i
@@ -873,6 +871,11 @@
                       >
                         View lands
                       </button>
+                    </div>
+                    <div style="display:flex ;justify-content: space-between; margin-top: 20px; margin-bottom: 20px; ">
+
+                      <button class="btn btn-success" id="addFavBtn">Add to Favorites</button>
+                      <button class="btn btn-success" id="addWatchBtn">Add to Watchlist</button>
                     </div>
                     <h4 class="text-white mt-0 text-break" id="com_name"></h4>
                     <span>
