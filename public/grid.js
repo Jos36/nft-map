@@ -2,6 +2,14 @@
 import { get } from "./api.js ";
 import { statessHead6, statessHead12, statessHead24 } from "./statess.js";
 
+const premuim = [
+  [-24, -36],
+  [0, -32],
+  [-36, -24],
+  [-36, -36],
+  [-48, -24],
+];
+
 function grid() {
   const d3 = window.d3;
   const factor = 100;
@@ -495,6 +503,8 @@ function grid() {
       );
       d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
       d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
     });
   };
   const deSelectAll6 = () => {
@@ -505,6 +515,8 @@ function grid() {
 
       d3.select(land._groups[0][1]).style("stroke", "#ffffff");
       d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
     });
   };
   const selectAll12 = () => {
@@ -514,8 +526,8 @@ function grid() {
       );
       d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
       d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
-      d3.select(land._groups[0][1]).style("stroke-width", "30");
-      d3.select(land._groups[0][3]).style("stroke-width", "30");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
     });
   };
   const deSelectAll12 = () => {
@@ -537,8 +549,8 @@ function grid() {
       );
       d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
       d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
-      d3.select(land._groups[0][1]).style("stroke-width", "30");
-      d3.select(land._groups[0][3]).style("stroke-width", "30");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
     });
   };
   const deSelectAll24 = () => {
@@ -568,9 +580,26 @@ function grid() {
   const selectPremium = document.getElementById("selectPremium");
   selectPremium.addEventListener("click", (e) => {
     if (e.target.checked) {
-      selectAll24();
+      premuim.forEach((landCord) => {
+        const land = d3.selectAll(
+          `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+        );
+        d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+        d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+        d3.select(land._groups[0][1]).style("stroke-width", "80");
+        d3.select(land._groups[0][3]).style("stroke-width", "80");
+      });
     } else {
-      deSelectAll24();
+      premuim.forEach((landCord) => {
+        const land = d3.selectAll(
+          `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+        );
+
+        d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+        d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+        d3.select(land._groups[0][1]).style("stroke-width", "15");
+        d3.select(land._groups[0][3]).style("stroke-width", "15");
+      });
     }
   });
 
@@ -728,6 +757,21 @@ function grid() {
           }
         });
       }
+    }
+  });
+
+  const darkModeSwitch = document.getElementById("darkMode");
+  const nav = document.getElementById("nav");
+
+  darkModeSwitch.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      nav.classList.remove("navbar-light");
+      nav.classList.remove("bg-light");
+      nav.classList.add("darkMode");
+    } else {
+      nav.classList.remove("darkMode");
+      nav.classList.add("navbar-light");
+      nav.classList.add("bg-light");
     }
   });
 }

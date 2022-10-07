@@ -443,7 +443,6 @@ function grid() {
   });
   // draw grid for the first time
   drawGrid();
-  reset();
   // fetch data and draw images
 
   get().then((res) => {

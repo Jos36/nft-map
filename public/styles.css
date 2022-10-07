@@ -453,7 +453,7 @@ multi-input {
 .navbar-light .navbar-nav .nav-link {
   color: #444c56;
 }
-.navbar-light .navbar-brand {
+.navbar-brand {
   margin-left: 20px;
 }
 .icon-dropdown {
@@ -608,4 +608,9 @@ multi-input {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.darkMode {
+  background-color: #14181d;
+  color: white;
 }

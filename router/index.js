@@ -17,7 +17,7 @@ router.get("/login", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "..", "/views/login.html")));
 });
 
-router.get("/dashboard", verify, (req, res) => {
+router.get("/dashboard", (req, res) => {
   res.sendFile(
     path.resolve(path.join(__dirname, "..", "/views/dashboard.html"))
   );

@@ -1,5 +1,14 @@
 /** @format */
 import { get, add, getRequests, getUsers, getCompanies } from "./api.js ";
+import { statessHead6, statessHead12, statessHead24 } from "./statess.js";
+
+const premuim = [
+  [-24, -36],
+  [0, -32],
+  [-36, -24],
+  [-36, -36],
+  [-48, -24],
+];
 
 function grid() {
   let formType = "person";
@@ -108,11 +117,11 @@ function grid() {
     }
   }
 
-  const zoom = d3.zoom().on("zoom", handleZoom);
   function handleZoom(e) {
     d3.select("svg#mapSvg > g").attr("transform", e.transform);
     d3.select("svg#mapSvgdash > g").attr("transform", e.transform);
   }
+  const zoom = d3.zoom().on("zoom", handleZoom);
 
   const createStates = (number) => {
     const stateRect = {};
@@ -532,6 +541,217 @@ function grid() {
 
   fetchData();
 
+  const selectAll1 = () => {
+    d3.select("svg#mapSvg")
+      .select("g")
+      .selectAll(".square")
+      .style("fill", "#FF69B4");
+  };
+  const deSelectAll1 = () => {
+    d3.select("svg#mapSvg")
+      .select("g")
+      .selectAll(".square")
+      .style("fill", "#04e38b");
+  };
+  const selectAll6 = () => {
+    statessHead6.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
+    });
+  };
+  const deSelectAll6 = () => {
+    statessHead6.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
+    });
+  };
+  const selectAll12 = () => {
+    statessHead12.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
+    });
+  };
+  const deSelectAll12 = () => {
+    statessHead12.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
+    });
+  };
+  const selectAll24 = () => {
+    statessHead24.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+      d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+      d3.select(land._groups[0][1]).style("stroke-width", "80");
+      d3.select(land._groups[0][3]).style("stroke-width", "80");
+    });
+  };
+  const deSelectAll24 = () => {
+    statessHead24.forEach((landCord) => {
+      const land = d3.selectAll(
+        `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+      );
+
+      d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+      d3.select(land._groups[0][1]).style("stroke-width", "15");
+      d3.select(land._groups[0][3]).style("stroke-width", "15");
+    });
+  };
+
+  // forsale filter
+  const selectForSale = document.getElementById("selectForSale");
+  selectForSale.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+    } else {
+      deSelectAll1();
+    }
+  });
+
+  // premuim filter
+  const selectPremium = document.getElementById("selectPremium");
+  selectPremium.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      premuim.forEach((landCord) => {
+        const land = d3.selectAll(
+          `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+        );
+        d3.select(land._groups[0][1]).style("stroke", "#FF69B4");
+        d3.select(land._groups[0][3]).style("stroke", "#FF69B4");
+        d3.select(land._groups[0][1]).style("stroke-width", "80");
+        d3.select(land._groups[0][3]).style("stroke-width", "80");
+      });
+    } else {
+      premuim.forEach((landCord) => {
+        const land = d3.selectAll(
+          `rect[x='${landCord[0] * 100}'][y='${landCord[1] * 100}']`
+        );
+
+        d3.select(land._groups[0][1]).style("stroke", "#ffffff");
+        d3.select(land._groups[0][3]).style("stroke", "#ffffff");
+        d3.select(land._groups[0][1]).style("stroke-width", "15");
+        d3.select(land._groups[0][3]).style("stroke-width", "15");
+      });
+    }
+  });
+
+  // onOpensea filter
+  const selectOpensea = document.getElementById("selectOpensea");
+  selectOpensea.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+      selectAll6();
+      selectAll12();
+      selectAll24();
+    } else {
+      deSelectAll1();
+      deSelectAll6();
+      deSelectAll12();
+      deSelectAll24();
+    }
+  });
+
+  // select1 filter
+  const select1 = document.getElementById("select1");
+  select1.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+    } else {
+      deSelectAll1();
+    }
+  });
+
+  // select6 filter
+  const select6 = document.getElementById("select6");
+  select6.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll6();
+    } else {
+      deSelectAll6();
+    }
+  });
+
+  // select12 filter
+  const select12 = document.getElementById("select12");
+  select12.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll12();
+    } else {
+      deSelectAll12();
+    }
+  });
+
+  // select24 filter
+  const select24 = document.getElementById("select24");
+  select24.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll24();
+    } else {
+      deSelectAll24();
+    }
+  });
+
+  // eth filter
+  const selectEth = document.getElementById("selectEth");
+  selectEth.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      selectAll1();
+      selectAll6();
+      selectAll12();
+      selectAll24();
+    } else {
+      deSelectAll1();
+      deSelectAll6();
+      deSelectAll12();
+      deSelectAll24();
+    }
+  });
+
+  // selectCoord
+  const selectCoord = document.getElementById("applySelectXY");
+  selectCoord.addEventListener("click", (e) => {
+    deSelectAll1();
+    const grid = d3.select("svg#mapSvg");
+    const x = document.getElementById("selectX").value;
+    const y = document.getElementById("selectY").value;
+    const container = grid.node().getBoundingClientRect();
+    const width = container.width;
+    const height = container.height;
+    const start = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(0.4)
+      .translate(-x * 100, -y * 100);
+    zoom.transform(grid, start);
+    grid.call(zoom.transform, start);
+    let t = d3.selectAll(`rect[x='${x * 100}'][y='${y * 100}']`);
+    d3.select(t._groups[0][1]).style("fill", "#FF69B4");
+  });
+
   // onsubmit form logic
   const form = document.getElementById("add-form");
   document.getElementById("add-form").addEventListener("submit", (e) => {
@@ -589,144 +809,159 @@ function grid() {
     }
   );
 
-  document.getElementById("profiles-button").addEventListener("click", (e) => {
-    e.preventDefault();
-    const tbody = document.getElementById("tprofiles");
+  // document.getElementById("profiles-button").addEventListener("click", (e) => {
+  //   e.preventDefault();
+  //   const tbody = document.getElementById("tprofiles");
 
-    getUsers().then((users) => {
-      tbody.innerHTML = `${users.map((user) => {
-        return `<tr>
-        <td>${user.name}</td>
-        <td>${user.username}</td>
-        <td>${user.email} </td>
-        <td>${user.location} </td>
-        <td>${user.company} </td>
-        <td>${user.role} </td>
-        <td>${user.website} </td>
-        <td>${user.bio} </td>
-        <td>${user.whatAreYouLookingFor.map((l) => {
-          return `<p>${l}</p>`;
-        })} </td>
-        <td>${user.whatTopicsAreYouInterestedIn} </td>
-        <td><small>${user.wallet}</small> </td>
-       
-      </tr>`;
-      })}
-     `;
-    });
+  //   getUsers().then((users) => {
+  //     tbody.innerHTML = `${users.map((user) => {
+  //       return `<tr>
+  //       <td>${user.name}</td>
+  //       <td>${user.username}</td>
+  //       <td>${user.email} </td>
+  //       <td>${user.location} </td>
+  //       <td>${user.company} </td>
+  //       <td>${user.role} </td>
+  //       <td>${user.website} </td>
+  //       <td>${user.bio} </td>
+  //       <td>${user.whatAreYouLookingFor.map((l) => {
+  //         return `<p>${l}</p>`;
+  //       })} </td>
+  //       <td>${user.whatTopicsAreYouInterestedIn} </td>
+  //       <td><small>${user.wallet}</small> </td>
 
-    addProfiles.show();
+  //     </tr>`;
+  //     })}
+  //    `;
+  //   });
 
-    const profilesTable = document.getElementById("profilesTable");
-    const person = document.getElementById("person-tab-button");
-    const company = document.getElementById("company-tab-button");
+  //   addProfiles.show();
 
-    person.addEventListener("click", (e) => {
-      e.preventDefault();
+  //   const profilesTable = document.getElementById("profilesTable");
+  //   const person = document.getElementById("person-tab-button");
+  //   const company = document.getElementById("company-tab-button");
 
-      company.classList.remove("active");
-      person.classList.add("active");
-      formType = "person";
+  //   person.addEventListener("click", (e) => {
+  //     e.preventDefault();
 
-      profilesTable.innerHTML = `
-      <table id="profilesTable" class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Location</th>
-          <th>Company</th>
-          <th>Role</th>
-          <th>Website</th>
-          <th>Bio</th>
-          <th>Looking for</th>
-          <th>Interested in</th>
-          <th>wallet</th>
-        </tr>
-      </thead>
-      <tbody id="tprofiles"></tbody>
-    </table>
-      `;
+  //     company.classList.remove("active");
+  //     person.classList.add("active");
+  //     formType = "person";
 
-      const tbody = document.getElementById("tprofiles");
-      getUsers().then((users) => {
-        tbody.innerHTML = `${users.map((user) => {
-          return `<tr>
-          <td>${user.name}</td>
-          <td>${user.username}</td>
-          <td>${user.email} </td>
-          <td>${user.location} </td>
-          <td>${user.company} </td>
-          <td>${user.role} </td>
-          <td>${user.website} </td>
-          <td>${user.bio} </td>
-          <td>${user.whatAreYouLookingFor.map((l) => {
-            return `<p>${l}</p>`;
-          })} </td>
-          <td>${user.whatTopicsAreYouInterestedIn} </td>
-          <td><small>${user.wallet}</small> </td>
-         
-        </tr>`;
-        })}
-       `;
-      });
-    });
+  //     profilesTable.innerHTML = `
+  //     <table id="profilesTable" class="table table-striped">
+  //     <thead>
+  //       <tr>
+  //         <th>Name</th>
+  //         <th>Username</th>
+  //         <th>Email</th>
+  //         <th>Location</th>
+  //         <th>Company</th>
+  //         <th>Role</th>
+  //         <th>Website</th>
+  //         <th>Bio</th>
+  //         <th>Looking for</th>
+  //         <th>Interested in</th>
+  //         <th>wallet</th>
+  //       </tr>
+  //     </thead>
+  //     <tbody id="tprofiles"></tbody>
+  //   </table>
+  //     `;
 
-    company.addEventListener("click", (e) => {
-      e.preventDefault();
+  //     const tbody = document.getElementById("tprofiles");
+  //     getUsers().then((users) => {
+  //       tbody.innerHTML = `${users.map((user) => {
+  //         return `<tr>
+  //         <td>${user.name}</td>
+  //         <td>${user.username}</td>
+  //         <td>${user.email} </td>
+  //         <td>${user.location} </td>
+  //         <td>${user.company} </td>
+  //         <td>${user.role} </td>
+  //         <td>${user.website} </td>
+  //         <td>${user.bio} </td>
+  //         <td>${user.whatAreYouLookingFor.map((l) => {
+  //           return `<p>${l}</p>`;
+  //         })} </td>
+  //         <td>${user.whatTopicsAreYouInterestedIn} </td>
+  //         <td><small>${user.wallet}</small> </td>
 
-      person.classList.remove("active");
-      company.classList.add("active");
-      formType = "company";
+  //       </tr>`;
+  //       })}
+  //      `;
+  //     });
+  //   });
 
-      profilesTable.innerHTML = `
-      <table id="profilesTable" class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Location</th>
-          <th>Company</th>
-          <th>Role</th>
-          <th>Website</th>
-          <th>Bio</th>
-          <th>Looking for</th>
-          <th>Interested in</th>
-          <th>Service</th>
-          <th>wallet</th>
-        </tr>
-      </thead>
-      <tbody id="tprofiles"></tbody>
-    </table>
-      `;
+  //   company.addEventListener("click", (e) => {
+  //     e.preventDefault();
 
-      const tbody = document.getElementById("tprofiles");
-      getCompanies().then((users) => {
-        console.log(users);
-        tbody.innerHTML = `${users.map((user) => {
-          return `<tr>
-          <td>${user.name}</td>
-          <td>${user.username}</td>
-          <td>${user.email} </td>
-          <td>${user.location} </td>
-          <td>${user.company} </td>
-          <td>${user.role} </td>
-          <td>${user.website} </td>
-          <td>${user.bio} </td>
-          <td>${user.whatKindOfServiceYouOffer} </td>
-          <td>${user.whatAreYouLookingFor.map((l) => {
-            return `<p>${l}</p>`;
-          })} </td>
-          <td>${user.whatTopicsAreYouInterestedIn} </td>
-          <td><small>${user.wallet}</small> </td>
-         
-        </tr>`;
-        })}
-       `;
-      });
-    });
+  //     person.classList.remove("active");
+  //     company.classList.add("active");
+  //     formType = "company";
+
+  //     profilesTable.innerHTML = `
+  //     <table id="profilesTable" class="table table-striped">
+  //     <thead>
+  //       <tr>
+  //         <th>Name</th>
+  //         <th>Username</th>
+  //         <th>Email</th>
+  //         <th>Location</th>
+  //         <th>Company</th>
+  //         <th>Role</th>
+  //         <th>Website</th>
+  //         <th>Bio</th>
+  //         <th>Looking for</th>
+  //         <th>Interested in</th>
+  //         <th>Service</th>
+  //         <th>wallet</th>
+  //       </tr>
+  //     </thead>
+  //     <tbody id="tprofiles"></tbody>
+  //   </table>
+  //     `;
+
+  //     const tbody = document.getElementById("tprofiles");
+  //     getCompanies().then((users) => {
+  //       console.log(users);
+  //       tbody.innerHTML = `${users.map((user) => {
+  //         return `<tr>
+  //         <td>${user.name}</td>
+  //         <td>${user.username}</td>
+  //         <td>${user.email} </td>
+  //         <td>${user.location} </td>
+  //         <td>${user.company} </td>
+  //         <td>${user.role} </td>
+  //         <td>${user.website} </td>
+  //         <td>${user.bio} </td>
+  //         <td>${user.whatKindOfServiceYouOffer} </td>
+  //         <td>${user.whatAreYouLookingFor.map((l) => {
+  //           return `<p>${l}</p>`;
+  //         })} </td>
+  //         <td>${user.whatTopicsAreYouInterestedIn} </td>
+  //         <td><small>${user.wallet}</small> </td>
+
+  //       </tr>`;
+  //       })}
+  //      `;
+  //     });
+  //   });
+  // });
+
+  const darkModeSwitch = document.getElementById("darkMode");
+  const nav = document.getElementById("nav");
+
+  darkModeSwitch.addEventListener("click", (e) => {
+    if (e.target.checked) {
+      nav.classList.remove("navbar-light");
+      nav.classList.remove("bg-light");
+      nav.classList.add("darkMode");
+    } else {
+      nav.classList.remove("darkMode");
+      nav.classList.add("navbar-light");
+      nav.classList.add("bg-light");
+    }
   });
 }
 

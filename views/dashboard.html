@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,7 +12,6 @@
     <script>
       jQuery.noConflict();
     </script>
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -19,7 +19,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -27,7 +26,6 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-
     <title>Metabitz</title>
     <link rel="stylesheet" href="./styles.css" />
     <style>
@@ -47,8 +45,6 @@
         position: relative;
       }
 
-
-     
       canvas {
         margin-left: auto;
         margin-right: auto;
@@ -163,11 +159,8 @@
         background: #505861;
         border-radius: 10px;
       }
-    
-
     </style>
   </head>
-
   <body>
     <div
       class="modal fade"
@@ -183,12 +176,6 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Add Company</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
             <table id="table" class="table table-striped">
@@ -216,7 +203,6 @@
         </div>
       </div>
     </div>
-
     <div
       class="modal fade"
       id="addProfiles"
@@ -231,12 +217,6 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Add Company</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
             <ul class="nav nav-tabs" style="margin-bottom: 20px">
@@ -290,7 +270,6 @@
         </div>
       </div>
     </div>
-
     <div
       class="modal fade"
       id="addModal"
@@ -304,15 +283,9 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Add Company</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
-            <form id="add-form" method="post">
+            <form id="add-form" method="post" name="add-form">
               <div class="mb-2">
                 <label for="" class="form-label">Coordinates</label>
                 <div class="d-flex align-items-center col-5 gap-2">
@@ -338,7 +311,7 @@
                 <label for="" class="form-label">Name</label>
                 <input
                   type="text"
-                  required
+                  required=""
                   name="name"
                   class="form-control form-control-sm"
                   id="name"
@@ -348,7 +321,7 @@
                 <label for="" class="form-label">Description</label>
                 <input
                   type="text"
-                  required
+                  required=""
                   name="description"
                   class="form-control form-control-sm"
                   id="desc"
@@ -358,7 +331,7 @@
                 <label for="" class="form-label">Logo</label>
                 <input
                   type="file"
-                  required
+                  required=""
                   name="logo"
                   class="form-control form-control-sm"
                   id="logo"
@@ -371,7 +344,7 @@
                 <input
                   type="file"
                   multiple
-                  required
+                  required=""
                   name="images"
                   class="form-control form-control-sm"
                   id="images"
@@ -390,7 +363,7 @@
               </div>
               <div class="mb-2">
                 <label for="" class="form-label"
-                  >Videos links <br />
+                  >Videos links<br />
                   <small
                     >(e.g : http://www.youtube.com/2423,
                     http://www.xyz.com/s423)</small
@@ -422,68 +395,78 @@
         </div>
       </div>
     </div>
- <!-- our header -->
+    <!-- our header -->
     <div>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light" id="nav">
         <div class="container-fluid">
           <a href="/dashboard" class="navbar-brand">Explore</a>
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class="nav-item">
-                <a href="#" class="navbar-brand">Stats</a>
+                <a
+                  href="https://mint.m2bitz.com/"
+                  target="_blank"
+                  class="navbar-brand"
+                  >Mint</a
+                >
               </li>
-
               <li class="nav-item dropdown">
                 <a href="#" class="navbar-brand" data-bs-toggle="dropdown"
                   >Resources</a
                 >
                 <div class="dropdown-menu">
-                  <a href="https://themetabitz.com/faq-es/" class="dropdown-item">Helo Center</a>
+                  <a
+                    href="https://themetabitz.com/faq-es/"
+                    target="_blank"
+                    class="dropdown-item"
+                    >Helo Center</a
+                  >
                   <div class="dropdown-divider"></div>
-
-                  <a href="https://themetabitz.com/blog/" class="dropdown-item">Blog</a>
+                  <a
+                    href="https://themetabitz.com/blog/"
+                    target="_blank"
+                    class="dropdown-item"
+                    >Blog</a
+                  >
                   <div class="dropdown-divider"></div>
-
-                  <a href="https://themetabitz.com" class="dropdown-item">About</a>
-
+                  <a
+                    href="https://themetabitz.com"
+                    target="_blank"
+                    class="dropdown-item"
+                    >About</a
+                  >
                   <div class="dropdown-divider"></div>
-                  <a href="https://cbztoken.com/whitepaper/" class="dropdown-item">Docs</a>
+                  <a
+                    href="https://cbztoken.com/whitepaper/"
+                    target="_blank"
+                    class="dropdown-item"
+                    >Docs</a
+                  >
                   <div class="dropdown-divider"></div>
-
-                  <a href="https://cbztoken.com" class="dropdown-item">Cbz Token</a>
+                  <a
+                    href="https://cbztoken.com"
+                    target="_blank"
+                    class="dropdown-item"
+                    >Cbz Token</a
+                  >
                   <div class="dropdown-divider"></div>
-
                   <a href="#" class="dropdown-item">Platform Status</a>
-                  <a href="#" class="dropdown-item" style="display: flex; justify-content: center;">
-
-                    <button class=" btn btn-success" style="border-radius: 15px;">Online</button>
-                  </a>
+                  <a
+                    href="#"
+                    class="dropdown-item"
+                    style="display: flex; justify-content: center"
+                    ><button
+                      class="btn btn-success"
+                      style="border-radius: 15px"
+                    >
+                      Online
+                    </button></a
+                  >
                   <div class="dropdown-divider"></div>
-
-
                   <a href="#" class="dropdown-item">
-                    <div style="display: flex">
-                      <i class="fa-brands fa-twitter icon-sty"></i>
-                      <i class="fa-brands fa-instagram icon-sty"></i>
-                      <i class="fa-brands fa-discord icon-sty"></i>
-
-                      <i class="fa-brands fa-discord icon-sty"></i>
-                      <i class="fa-brands fa-youtube icon-sty"></i>
-                      <i class="fa-brands fa-tiktok icon-sty"></i>
-                    </div>
-                  </a>
+                    <div style="display: flex"></div
+                  ></a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a href="https://mint.m2bitz.com/" class="navbar-brand">Mint</a>
               </li>
             </ul>
             <ul class="nav navbar-nav ms-auto">
@@ -494,55 +477,39 @@
                   role="button"
                   aria-expanded="false"
                   data-bs-toggle="dropdown"
-                >
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  ><img
+                    src="/assets/icon.avif"
                     class="rounded-circle"
                     height="30"
                     alt="Black and White Portrait of a Man"
                     loading="lazy"
-                  />
-                </a>
+                /></a>
                 <div class="dropdown-menu dropdown-menu-end">
                   <a href="/profile" class="dropdown-item"
-                    ><i class="fa-solid fa-user icon-style"></i
                     ><span>Profile</span></a
                   >
                   <div class="dropdown-divider"></div>
-
-               <a href="/profile#favorites" class="dropdown-item"
-                    ><i class="fa-regular fa-heart icon-style"></i
+                  <a href="/profile#favorites" class="dropdown-item"
                     ><span>Favorites</span></a
                   >
                   <div class="dropdown-divider"></div>
                   <a href="/profile#watchlist" class="dropdown-item"
-                    ><i class="fa-solid fa-eye icon-style"></i
                     ><span>Watchlist</span></a
                   >
-
                   <div class="dropdown-divider"></div>
                   <a href="/profile#nfts" class="dropdown-item"
-                    ><i class="fa-solid fa-table-cells icon-style"></i
                     ><span>My Collection</span></a
                   >
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item"
-                    ><i class="fa-solid fa-gear icon-style"></i
+                  <a href="/profile" class="dropdown-item"
                     ><span>Settings</span></a
                   >
                   <div class="dropdown-divider"></div>
                   <a id="addTableBtn" class="dropdown-item"
-                    ><i class="fa-solid fa-gear icon-style"></i
                     ><span>Requests</span></a
                   >
-
                   <div class="dropdown-divider"></div>
-                  <a href="/" class="dropdown-item"
-                    ><i
-                      class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
-                    ></i
-                    ><span>Log Out</span></a
-                  >
+                  <a href="/" class="dropdown-item"><span>Log Out</span></a>
                   <div class="dropdown-divider"></div>
                   <div style="display: flex; margin-right: 10px">
                     <a href="#" class="dropdown-item"
@@ -550,7 +517,11 @@
                       ><span>Night Mode</span></a
                     >
                     <label class="toggle mt-2">
-                      <input class="toggle-checkbox" type="checkbox" />
+                      <input
+                        class="toggle-checkbox"
+                        type="checkbox"
+                        id="darkMode"
+                      />
                       <div class="toggle-switch"></div>
                     </label>
                   </div>
@@ -563,65 +534,51 @@
                   role="button"
                   aria-expanded="false"
                   data-bs-toggle="dropdown"
-                >
-                  <!-- <i class="fa-thin fa-wallet icon-style"></i> -->
+                  ><!-- <i class="fa-thin fa-wallet icon-style"></i> -->
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/879/879762.png"
                     class="icon-dropdown"
                     height="30"
                     alt="Black and White Portrait of a Man"
-                  />
-                </a>
+                /></a>
                 <div class="dropdown-menu dropdown-menu-end wallet-div">
-                   <div style="display:flex ;">
+                  <div style="display: flex">
                     <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                    class="rounded-circle mt-1"
-                    height="30"
-                    alt="Black and White Portrait of a Man"
-                    loading="lazy"
-                  />
-                  <h5 class="name-mtz">
-                    THE_METABITZ 
-                  </h5>  
+                      src="/assets/icon.avif"
+                      class="rounded-circle mt-1"
+                      height="30"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+                    <h5 class="name-mtz">THE_METABITZ</h5>
                   </div>
                   <div class="dropdown-divider"></div>
-                   <div class="border-div">
-                   <span class="blnce-text">
-                    Total balance 
-                   </span>
-                   <h5 class="balance">
-                    $321.44 USD 
-                   </h5>
-                   <div class="botom-div">
-                    <span>Add Funds</span>
-                   </div>
-                   </div>
-                   <div class="dropdown-divider"></div>
-                      <div class="row border-dic-eth">
-                        <div class="col-lg-1">
-                          <i class="fa-brands fa-ethereum icon-ethc"></i>
-                        </div>
-                        <div class="col-lg-5">
-                          <span  class="blnce-text">ETH</span>
-                          <br/>
-                          <h5>Ethereum</h5>
-                        </div>
-                        <div class="col-lg-5 float-right">
-                          <span  class="blnce-text">0.2041</span>
-                          <br/>
-                          <h5>$321.44 USD</h5>
-                        </div>
-                        <div class="col-lg-1">
-                          <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                   </div>
+                  <div class="border-div">
+                    <span class="blnce-text">Total balance</span>
+                    <h5 class="balance">$321.44 USD</h5>
+                    <div class="botom-div">
+                      <span>Add Funds</span>
+                    </div>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <div class="row border-dic-eth">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-5">
+                      <span class="blnce-text">ETH</span><br />
+                      <h5>Ethereum</h5>
+                    </div>
+                    <div class="col-lg-5 float-right">
+                      <span class="blnce-text">0.2041</span><br />
+                      <h5>$321.44 USD</h5>
+                    </div>
+                    <div class="col-lg-1"></div>
+                  </div>
                 </div>
               </li>
             </ul>
           </div>
-       </nav>
+        </div>
+      </nav>
       <!-- <nav
         class="navbar navbar-dark fixed-top p-2 pt-4"
         style="background-color: #000000"
@@ -670,49 +627,38 @@
         </p>
       </nav> -->
     </div>
-    
-     <div class="bottom-divs">
+    <div class="bottom-divs">
       <div class="side-bar d-none d-lg-block d-xl-block d-md-block">
         <div class="display">
           <h3 class="text-head-map">MAP</h3>
           <a href="#">Clear</a>
         </div>
         <div class="devider">.</div>
-
         <div class="display1">
           <input type="checkbox" class="check-box" id="selectForSale" />
           <div class="color-box"></div>
           <h3 class="text">For Sale</h3>
         </div>
-        <div class="display1" >
+        <div class="display1">
           <input type="checkbox" class="check-box" id="selectPremium" />
           <div class="color-box"></div>
           <h3 class="text">Premium</h3>
         </div>
-
         <div class="display1">
-          <input type="checkbox" class="check-box" id="selectOpensea"/>
+          <input type="checkbox" class="check-box" id="selectOpensea" />
           <div class="color-box"></div>
           <h3 class="text">On OpenSea</h3>
         </div>
-
         <div class="devider">.</div>
-
         <div class="display">
           <h3 class="text-head ml-1">Find LAND on OpenSea</h3>
-          <i
-            class="fa-solid fa-arrow-up-right-from-square"
-            style="color: white; margin-right: 10px"
-          ></i>
         </div>
         <div class="devider">.</div>
         <h3 class="head-text">SIZE</h3>
-
         <div class="display1">
-          <input type="checkbox" class="check-box"  id="select1"/>
+          <input type="checkbox" class="check-box" id="select1" />
           <h3 class="text">1x1</h3>
         </div>
-
         <div class="display1">
           <input type="checkbox" class="check-box" id="select6" />
           <h3 class="text">6x6</h3>
@@ -721,7 +667,6 @@
           <input type="checkbox" class="check-box" id="select12" />
           <h3 class="text">12x12</h3>
         </div>
-
         <div class="display1">
           <input type="checkbox" class="check-box" id="select24" />
           <h3 class="text">24x24</h3>
@@ -729,8 +674,7 @@
         <div class="devider">.</div>
         <h3 class="head-text">CHAIN</h3>
         <div class="display1">
-          <input type="checkbox" class="check-box" id="selectEth"/>
-          <i class="fa-brands fa-ethereum colored-div"></i>
+          <input type="checkbox" class="check-box" id="selectEth" />
           <h3 class="text">Ethereum</h3>
         </div>
         <div class="display1">
@@ -738,14 +682,11 @@
           <!-- <i class="fa-solid fa-vector-polygon colored-div2"></i> -->
           <!-- <i class="fa-duotone fa-vector-polygon "></i> -->
           <!-- <i class="fa-duotone fa-link colored-div2"></i> -->
-          <i class="fa-solid fa-draw-polygon colored-div3"></i>
           <!-- <i class="fa-regular fa-solid fa-vector-polygon colored-div2"></i> -->
           <h3 class="text">Polygon</h3>
         </div>
         <div class="devider">.</div>
-
         <h3 class="head-text">COORDINATES</h3>
-
         <div class="row bts">
           <div class="col-lg-5 offset-1">
             <p class="text">X</p>
@@ -753,7 +694,7 @@
           </div>
           <div class="col-lg-5">
             <p class="text">Y</p>
-            <input type="text" class="inputs" id="selectY"/>
+            <input type="text" class="inputs" id="selectY" />
           </div>
         </div>
         <div class="row" style="width: 100%">
@@ -769,7 +710,6 @@
           </div>
         </div>
         <div class="devider">.</div>
-
         <div class="row bts">
           <div class="col-lg-10 offset-1">
             <h3 class="head-text">WALLET</h3>
@@ -782,7 +722,6 @@
           </div>
         </div>
         <div class="devider">.</div>
-
         <div class="row bts">
           <div class="col-lg-10 offset-1">
             <h3 class="head-text">PARTNERS</h3>
@@ -794,68 +733,51 @@
             />
           </div>
         </div>
-
         <!-- last menu  -->
         <div class="row">
           <div class="col-lg-11 scrol-div">
-            <nav
-              id="sidebarMenu"
-              class="collapse d-lg-block sidebar collapse"
-            >
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
               <div class="list-group mx-3 mt-4">
-                <a href="#" class="list-group-itemstyle py-2">
-                  <i class="fas fa-chart-area fa-fw me-3"></i
-                  ><span>Atari </span>
-                </a>
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-lock fa-fw me-3"></i
-                  ><span>Avenged Sevenfold</span>
-                </a>
+                  ><span>Atari</span></a
+                >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-chart-line fa-fw me-3"></i
+                  ><span>Avenged Sevenfold</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
                   ><span>Analytics</span></a
                 >
-                <a href="#" class="list-group-itemstyle py-2">
-                  <i class="fas fa-chart-pie fa-fw me-3"></i
-                  ><span>Binance</span>
-                </a>
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-chart-bar fa-fw me-3"></i
+                  ><span>Binance</span></a
+                >
+                <a href="#" class="list-group-itemstyle py-2"
                   ><span>Care Bears</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-globe fa-fw me-3"></i
                   ><span>CoinMarketCap</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-building fa-fw me-3"></i
                   ><span>Deadmau5</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-calendar fa-fw me-3"></i
                   ><span>Gemini</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-users fa-fw me-3"></i
                   ><span>Pranksy NFT Boxes</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-money-bill fa-fw me-3"></i
-                  ><span>REVV </span></a
+                  ><span>REVV</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-calendar fa-fw me-3"></i
-                  ><span>The Smurfs </span></a
+                  ><span>The Smurfs</span></a
                 >
                 <a href="#" class="list-group-itemstyle py-2"
-                  ><i class="fas fa-chart-bar fa-fw me-3"></i
                   ><span>Zepeto</span></a
                 >
               </div>
             </nav>
           </div>
         </div>
-      </div>
       </div>
       <div>
         <div class="floating-container-grid">
@@ -865,42 +787,32 @@
             </div>
             <!-- <canvas id="mapSvgSmall" class="mapcanvs"> </canvas> -->
             <!-- <canvas id="mapSvgSmall" class="mapcanvs">  -->
-    
             <div class="width">
               <button id="zoom_in" class="smal-grid-button-plus">+</button>
-    
-              <input type="range" step="0.1" max="1" min="0" class="range" id="range"/>
-    
+              <input
+                type="range"
+                step="0.1"
+                max="1"
+                min="0"
+                class="range"
+                id="range"
+              />
               <button class="smal-grid-button-deduct" id="zoom_out">-</button>
             </div>
           </div>
           <div>
-            <div class="togle-show-blue">
-              <i class="fas fa-angle-right icon-togle"></i>
-            </div>
-    
-            <div class="togle-show mt-2">
-              <i class="fa-sharp fa-solid fa-circle-info icon-togle"></i>
-            </div>
-    
-            <div class="togle-show mt-2">
-              <i class="fa-solid fa-list icon-togle"></i>
-            </div>
+            <div class="togle-show-blue"></div>
+            <div class="togle-show mt-2"></div>
+            <div class="togle-show mt-2"></div>
           </div>
         </div>
-        <div style="background-color: black" id="screenshot">
-          <svg id="mapSvg"></svg>
-        </div> 
+        <svg id="mapSvg"></svg>
       </div>
-        
-     </div>
-   
- 
-    
+    </div>
     <div id="myNav" class="overlay" style="z-index: 999999">
       <div id="loader" class="loader"></div>
       <div class="landInfo" id="landInfo">
-        <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
+        <a href="javascript:void(0)" class="closebtn" id="closebtn">×</a>
         <div class="overlay-content p-2">
           <div class="container-fluid">
             <div class="">
@@ -918,10 +830,6 @@
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide="prev"
                 >
-                  <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
                 <button
@@ -930,16 +838,11 @@
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide="next"
                 >
-                  <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
               <div class="col">
                 <div class="m-0 mt-2 blockquote" style="color: greenyellow">
-                  <i class="fa-solid fa-location-dot text-danger"></i>
                   <small id="com_location"></small>
                   <button
                     id="view-lands-button"
@@ -950,21 +853,20 @@
                   </button>
                 </div>
                 <h4 class="text-white mt-0 text-break" id="com_name"></h4>
-                <span>
-                  <h6 class="mt-3 text-light">
-                    <i class="fa-solid fa-pen-to-square"></i
-                    ><span class="text-decoration-none"> Description</span>
-                  </h6>
-                  <small
-                    class="text-white"
-                    style="text-justify: auto; text-align: justify"
-                    id="com_description"
+                <h6 class="mt-3 text-light">
+                  <span
+                    ><span class="text-decoration-none">Description</span></span
                   >
-                  </small
-                  ><br /><br />
-                  <h6 class="text-white text-decoration-underline">Links</h6>
-                  <small class="text-primary" id="com_links"></small><br />
-                </span>
+                </h6>
+                <small
+                  class="text-white"
+                  style="text-justify: auto; text-align: justify"
+                  id="com_description"
+                ></small
+                ><br />
+                <br />
+                <h6 class="text-white text-decoration-underline">Links</h6>
+                <small class="text-primary" id="com_links"></small><br />
               </div>
               <div class="col text-white mt-5">
                 <h5>Videos</h5>
@@ -972,7 +874,7 @@
                   id="com_video"
                   src=""
                   style="width: 350px; height: fit-content"
-                  controls
+                  controls=""
                   autoplay="true"
                 ></video>
               </div>
@@ -981,7 +883,6 @@
         </div>
       </div>
     </div>
-
     <div
       class="modal fade hide"
       id="view-lands-modal"
@@ -1022,7 +923,6 @@
         </div>
       </div>
     </div>
-
     <script>
       async function applyRequest(id) {
         const formData = new FormData();
@@ -1061,6 +961,7 @@
       }
     </script>
     <!-- walletconnect -->
+
     <script
       type="text/javascript"
       src="https://unpkg.com/web3@1.5.2/dist/web3.min.js"
@@ -1078,11 +979,11 @@
       src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"
     ></script>
     <!-- notfications -->
+
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/notiflix@3.0.2/dist/notiflix-aio-3.0.2.min.js"
     ></script>
-
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.4/underscore-umd-min.js"></script>
     <script
@@ -1100,6 +1001,5 @@
     <script src="./wallet.js" type="module"></script>
     <script type="module" src="./dashboard.js"></script>
     <script type="module" src="./dashboardSmalSvg.js"></script>
-
   </body>
 </html>
