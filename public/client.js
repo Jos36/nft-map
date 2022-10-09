@@ -1339,10 +1339,9 @@ function grid() {
       checkForUser().then(async (user) => {
         window.user = user[0];
         const navimage = document.getElementById("navImage");
-        const ETHbal = document.getElementById("ETHbal");
         const Etherbal = document.getElementById("Etherbal");
-        ETHbal.innerText = window.accountData.balance;
-        Etherbal.innerText = window.accountData.balance;
+        Etherbal.innerText =
+          Number(window.accountData.balance) / 1000000000000000000;
         navimage.src = user[0].image;
       });
     });
