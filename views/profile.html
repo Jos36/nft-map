@@ -252,7 +252,7 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="nav-item">
-              <a href="#" class="navbar-brand">Stats</a>
+              <a href="https://mint.m2bitz.com/" target="_blank" class="navbar-brand">Mint</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -260,19 +260,19 @@
                 >Resources</a
               >
               <div class="dropdown-menu">
-                <a href="https://themetabitz.com/faq-es/" class="dropdown-item">Helo Center</a>
+                <a href="https://themetabitz.com/faq-es/" target="_blank" class="dropdown-item">Helo Center</a>
                 <div class="dropdown-divider"></div>
 
-                <a href="https://themetabitz.com/blog/" class="dropdown-item">Blog</a>
+                <a href="https://themetabitz.com/blog/" target="_blank" class="dropdown-item">Blog</a>
                 <div class="dropdown-divider"></div>
 
-                <a href="https://themetabitz.com" class="dropdown-item">About</a>
+                <a href="https://themetabitz.com" target="_blank" class="dropdown-item">About</a>
 
                 <div class="dropdown-divider"></div>
-                <a href="https://cbztoken.com/whitepaper/" class="dropdown-item">Docs</a>
+                <a href="https://cbztoken.com/whitepaper/" target="_blank" class="dropdown-item">Docs</a>
                 <div class="dropdown-divider"></div>
 
-                <a href="https://cbztoken.com" class="dropdown-item">Cbz Token</a>
+                <a href="https://cbztoken.com" target="_blank" class="dropdown-item">Cbz Token</a>
                 <div class="dropdown-divider"></div>
 
                 <a href="#" class="dropdown-item">Platform Status</a>
@@ -308,56 +308,51 @@
                 data-bs-toggle="dropdown"
               >
                 <img
-                  src=""
+                  src="/assets/profile.svg"
                   class="rounded-circle"
                   height="30"
                   alt="Black and White Portrait of a Man"
                   loading="lazy"
                   id="navImage"
+                  style='padding-right:20px'
+
                 />
               </a>
               <div class="dropdown-menu dropdown-menu-end">
-                <!-- <a href="/profile" class="dropdown-item"
+                <a href="/profile" class="dropdown-item"
                   ><i class="fa-solid fa-user icon-style"></i
                   ><span>Profile</span></a
                 >
-                <div class="dropdown-divider"></div> -->
+                <div class="dropdown-divider"></div>
 
-                <a href="#" class="dropdown-item"
+                <a href="/profile#favorites" class="dropdown-item"
                   ><i class="fa-regular fa-heart icon-style"></i
                   ><span>Favorites</span></a
                 >
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item"
+                <a href="/profile#watchlist" class="dropdown-item"
                   ><i class="fa-solid fa-eye icon-style"></i
                   ><span>Watchlist</span></a
                 >
 
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item"
+                <a href="/profile#nfts" class="dropdown-item"
                   ><i class="fa-solid fa-table-cells icon-style"></i
                   ><span>My Collection</span></a
                 >
 
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item"
+                <a href="/profile" class="dropdown-item"
                   ><i class="fa-solid fa-gear icon-style"></i
                   ><span>Settings</span></a
                 >
 
                 <div class="dropdown-divider"></div>
-                <a href="/login" class="dropdown-item"
+                <a href="/" class="dropdown-item"
                   ><i
                     class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
                   ></i
-                  ><span>Log in</span></a
-                >
-                <div class="dropdown-divider"></div>
-                <a href="/loginregister" class="dropdown-item"
-                  ><i
-                    class="fa-sharp fa-solid icon-style fa-arrow-right-from-bracket"
-                  ></i
-                  ><span>Log in/Register</span></a
+                  ><span>Log Out</span></a
                 >
                 <div class="dropdown-divider"></div>
                 <div style="display: flex; margin-right: 10px">
@@ -366,13 +361,60 @@
                     ><span>Night Mode</span></a
                   >
                   <label class="toggle mt-2">
-                    <input class="toggle-checkbox" type="checkbox" />
+                    <input class="toggle-checkbox" type="checkbox" id="darkMode" />
                     <div class="toggle-switch"></div>
                   </label>
                 </div>
               </div>
             </li>
-           
+            <li class="dropdown">
+              <a
+                class="d-flex align-items-center hidden-arrow"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+                data-bs-toggle="dropdown"
+              >
+                <!-- <i class="fa-thin fa-wallet icon-style"></i> -->
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/879/879762.png"
+                  class="icon-dropdown"
+                  height="30"
+                  alt="Black and White Portrait of a Man"
+                />
+              </a>
+              <div class="dropdown-menu dropdown-menu-end wallet-div">
+                 <div style="display:flex ;">
+                  <img
+                  src="/assets/icon.avif"
+                  class="rounded-circle mt-1"
+                  height="30"
+                  alt="Black and White Portrait of a Man"
+                  loading="lazy"
+                />
+                <h5 class="name-mtz">
+                  THE_METABITZ 
+                </h5>  
+                </div>
+                    <div class="row border-dic-eth" style="margin-top:30px;display: flex;align-items: center;">
+                      <div class="col-lg-1">
+                        <i class="fa-brands fa-ethereum"></i>
+                      </div>
+                      <div class="col-lg-5">
+                       
+                        <h5>Ethereum</h5>
+                      </div>
+                      <div class="col-lg-5 float-right">
+                    
+                        <h5 id="Etherbal">0</h5>
+                      </div>
+                      <div class="col-lg-1">
+                        <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+            </li>
           </ul>
      </nav>
       <!-- <nav

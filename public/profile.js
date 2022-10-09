@@ -53,7 +53,9 @@ async function grid() {
                         <div class="leftPanel__container__top">
                           <p id="name" class="text-muted m-0 text-center">${username}</p>
                         
-                          <img src="${image}" class="rounded-circle shadow-4"
+                          <img src="${
+                            image ? image : "/assets/profile.svg"
+                          }" class="rounded-circle shadow-4"
                           style="width: 120px;margin-top:20px;margin-bottom:20px" alt="Avatar" />
                           <h5 id="name" class="text-white m-0 text-center font-bold">${name}</h4>
                         </div>
