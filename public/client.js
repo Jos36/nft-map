@@ -603,6 +603,12 @@ function grid() {
   const factor = 100;
   let isLoading = true;
   let data = null;
+
+  Notiflix.Notify.init({
+    position: "right-top",
+    zindex: "999999",
+  });
+
   function openNav(key) {
     let indicators = document.getElementById("indicators");
     let location = document.getElementById("com_location");
@@ -915,7 +921,6 @@ function grid() {
   //   zoom.scaleBy(mapSvg, 1 / 1.3);
   // });
 
-  //TODO: separate d3 functions
   function drawGrid() {
     const grid = d3
       .select("#mapSvg")
@@ -930,6 +935,7 @@ function grid() {
     const states24 = createStates(24);
     const states12 = createStates(12);
     const states6 = createStates(6);
+
     const states = { ...states24, ...states12, ...states6 };
 
     const square = grid
@@ -1175,7 +1181,6 @@ function grid() {
       d3.select(land._groups[0][3]).style("stroke-width", "15");
     });
   };
-
   // forsale filter
   const selectForSale = document.getElementById("selectForSale");
   selectForSale.addEventListener("click", (e) => {
@@ -1290,6 +1295,7 @@ function grid() {
     e.preventDefault();
     let location = document.getElementById("com_location");
     addFavorite(location.textContent, window.accountData.account);
+    Notiflix.Notify.success("Land added to favorites");
   });
 
   const addWatch = document.getElementById("addWatchBtn");
@@ -1297,6 +1303,7 @@ function grid() {
     e.preventDefault();
     let location = document.getElementById("com_location");
     addWatchlist(location.textContent, window.accountData.account);
+    Notiflix.Notify.success("Land added to watchlist");
   });
 
   // selectCoord
@@ -1318,8 +1325,6 @@ function grid() {
     let t = d3.selectAll(`rect[x='${x * 100}'][y='${y * 100}']`);
     d3.select(t._groups[0][1]).style("fill", "#FF69B4");
   });
-  drawGrid();
-  reset();
 
   async function checkForUser() {
     const user = checkUser(window.accountData.account);
@@ -1330,10 +1335,14 @@ function grid() {
 
   get().then((res) => {
     verifyWalletConnection().then(() => {
-      console.log(window.accountData.account);
+      console.log(window.accountData);
       checkForUser().then(async (user) => {
         window.user = user[0];
         const navimage = document.getElementById("navImage");
+        const ETHbal = document.getElementById("ETHbal");
+        const Etherbal = document.getElementById("Etherbal");
+        ETHbal.innerText = window.accountData.balance;
+        Etherbal.innerText = window.accountData.balance;
         navimage.src = user[0].image;
       });
     });

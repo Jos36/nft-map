@@ -362,12 +362,14 @@
                   data-bs-toggle="dropdown"
                 >
                   <img
-                    src="/assets/icon.avif"
+                    src="/assets/profile.svg"
                     class="rounded-circle"
                     height="30"
                     alt="Black and White Portrait of a Man"
                     loading="lazy"
                     id="navImage"
+                    style='padding-right:20px'
+
                   />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -448,20 +450,7 @@
                     THE_METABITZ 
                   </h5>  
                   </div>
-                  <div class="dropdown-divider"></div>
-                   <div class="border-div">
-                   <span class="blnce-text">
-                    Total balance 
-                   </span>
-                   <h5 class="balance">
-                    $321.44 USD 
-                   </h5>
-                   <div class="botom-div">
-                    <span>Add Funds</span>
-                   </div>
-                   </div>
-                   <div class="dropdown-divider"></div>
-                      <div class="row border-dic-eth">
+                      <div class="row border-dic-eth" style="margin-top:30px">
                         <div class="col-lg-1">
                           <i class="fa-brands fa-ethereum icon-ethc"></i>
                         </div>
@@ -471,9 +460,9 @@
                           <h5>Ethereum</h5>
                         </div>
                         <div class="col-lg-5 float-right">
-                          <span  class="blnce-text">0.2041</span>
+                          <span id="ETHbal"  class="blnce-text">0.2041</span>
                           <br/>
-                          <h5>$321.44</h5>
+                          <h5 id="Etherbal">$321.44</h5>
                         </div>
                         <div class="col-lg-1">
                           <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
