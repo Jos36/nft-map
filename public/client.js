@@ -1340,8 +1340,13 @@ function grid() {
         window.user = user[0];
         const navimage = document.getElementById("navImage");
         const Etherbal = document.getElementById("Etherbal");
-        Etherbal.innerText =
-          Number(window.accountData.balance) / 1000000000000000000;
+        const bal = document.getElementById("balance");
+        Etherbal.innerText = ` ${
+          Number(window.accountData.balance) / 1000000000000000000
+        } ETH`;
+        bal.innerText = `${
+          Number(window.accountData.balance) / 1000000000000000000
+        } ETH`;
         if (user[0].image) {
           navimage.src = user[0].image;
         }

@@ -5,7 +5,16 @@ import { verifyWalletConnection } from "./wallet.js";
 let isEditing = true;
 let formType = "person";
 
-verifyWalletConnection();
+verifyWalletConnection().then(() => {
+  const Etherbal = document.getElementById("Etherbal");
+  const bal = document.getElementById("balance");
+  Etherbal.innerText = ` ${
+    Number(window.accountData.balance) / 1000000000000000000
+  } ETH`;
+  bal.innerText = `${
+    Number(window.accountData.balance) / 1000000000000000000
+  } ETH`;
+});
 
 const form = document.getElementById("settings-form");
 document.getElementById("settings-form").addEventListener("submit", (e) => {

@@ -16,8 +16,17 @@ async function grid() {
   async function isLoggedIn() {
     verifyWalletConnection().then((data) => {
       if (data) {
-        console.log(data);
-        console.log("wallet connection verified");
+        // update balance
+        const Etherbal = document.getElementById("Etherbal");
+        const bal = document.getElementById("balance");
+        Etherbal.innerText = ` ${
+          Number(window.accountData.balance) / 1000000000000000000
+        } ETH`;
+        bal.innerText = `${
+          Number(window.accountData.balance) / 1000000000000000000
+        } ETH`;
+
+        // set the page content
         checkForUser().then(async (user) => {
           console.log(user);
           if (user) {
