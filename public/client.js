@@ -1342,7 +1342,9 @@ function grid() {
         const Etherbal = document.getElementById("Etherbal");
         Etherbal.innerText =
           Number(window.accountData.balance) / 1000000000000000000;
-        navimage.src = user[0].image;
+        if (user[0].image) {
+          navimage.src = user[0].image;
+        }
       });
     });
     data = res;
@@ -1409,17 +1411,38 @@ function grid() {
 
   const darkModeSwitch = document.getElementById("darkMode");
   const nav = document.getElementById("nav");
+  const map = document.getElementById("bottom-divs");
+  const side = document.getElementById("side-bar");
 
   darkModeSwitch.addEventListener("click", (e) => {
     if (e.target.checked) {
       nav.classList.remove("navbar-light");
       nav.classList.remove("bg-light");
+      map.classList.remove("bg-light");
+      side.classList.remove("bg-light");
       nav.classList.add("darkMode");
     } else {
+      map.classList.add("bg-light");
       nav.classList.remove("darkMode");
       nav.classList.add("navbar-light");
       nav.classList.add("bg-light");
+      side.classList.add("bg-light");
     }
+  });
+
+  const walletModalBtn = document.getElementById("walletModalBtn");
+  const walletModal = new bootstrap.Modal(
+    document.getElementById("walletModal"),
+    {
+      keyboard: false,
+    }
+  );
+
+  walletModalBtn.addEventListener("click", () => {
+    const walletAddressField = document.getElementById("walletAddressField");
+    walletModal.show();
+    walletAddressField.value = window.accountData.account;
+    navigator.clipboard.writeText(window.accountData.account);
   });
 }
 grid();

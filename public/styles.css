@@ -614,3 +614,18 @@ multi-input {
   background-color: #14181d;
   color: white;
 }
+
+#settings-form > div > input {
+  background-color: #101010;
+  color: white;
+  border: #3a3a3a solid 1px;
+}
+
+#settings-minput > * {
+  background-color: #101010;
+  color: white;
+}
+#settings-minput {
+  background-color: #101010;
+  border: #3a3a3a solid 1px;
+}

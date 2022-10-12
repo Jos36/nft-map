@@ -50,6 +50,60 @@
 
   <body>
     <div
+    class="modal fade"
+    id="walletModal"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="13213"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel" style="margin-left:180px ;">
+            Add funds
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="add-form" method="post">
+          
+           
+          
+            <label for="" class="form-label" style="text-align: center;">Transfer funds from an exchange or another wallet to your wallet address below</label>
+          </form>
+        </div>
+        <div class="modal-footer m-0 p-0">
+          <div class="mb-2" style="width: 100%;">
+            <div style="display: flex; width: 100%;">
+
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="walletAddressField"
+              disabled
+              style="margin: 5px ;"
+            /> 
+            <button
+            value="Copy"
+            class="btn btn-primary float-lg-end"
+            id="copyBtn"
+            style="margin: 5px ;margin-left: 20px;"
+          >Copy</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div
       class="modal fade"
       id="addModal"
       data-bs-backdrop="static"
@@ -238,7 +292,7 @@
       </div>
     </div>
     <div>
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light" id="nav">
          
         <a href="/" class="navbar-brand">Explore</a>
         <button
@@ -342,7 +396,7 @@
                 >
 
                 <div class="dropdown-divider"></div>
-                <a href="/profile" class="dropdown-item"
+                <a href="/settings" class="dropdown-item"
                   ><i class="fa-solid fa-gear icon-style"></i
                   ><span>Settings</span></a
                 >
@@ -384,36 +438,51 @@
                 />
               </a>
               <div class="dropdown-menu dropdown-menu-end wallet-div">
-                 <div style="display:flex ;">
-                  <img
-                  src="/assets/icon.avif"
-                  class="rounded-circle mt-1"
-                  height="30"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-                <h5 class="name-mtz">
-                  THE_METABITZ 
-                </h5>  
+                   <div style="display:flex ;">
+                    <img
+                    src="/assets/icon.avif"
+                    class="rounded-circle mt-1"
+                    height="30"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                  <h5 class="name-mtz">
+                    THE_METABITZ 
+                  </h5>  
+                  </div>
+                  <div class="dropdown-divider"></div>
+                   <div class="border-div">
+                   <span class="blnce-text">
+                    Total balance 
+                   </span>
+                   <h5 class="balance">
+                    $321.44 USD 
+                   </h5>
+                   <div class="botom-div" id="walletModalBtn">
+                    <span >Add Funds</span>
+                   </div>
+                   </div>
+                   <div class="dropdown-divider"></div>
+                      <div class="row border-dic-eth">
+                        <div class="col-lg-1">
+                          <i class="fa-brands fa-ethereum icon-ethc"></i>
+                        </div>
+                        <div class="col-lg-5">
+                          <span  class="blnce-text">ETH</span>
+                          <br/>
+                          <h5>Ethereum</h5>
+                        </div>
+                        <div class="col-lg-5 float-right">
+                          <span  class="blnce-text" id="Etherbal">0</span>
+                          <br/>
+                          <h5>$321.44</h5>
+                        </div>
+                        <div class="col-lg-1">
+                          <i class="fa fa-ellipsis-v icon-ethc" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                   </div>
                 </div>
-                    <div class="row border-dic-eth" style="margin-top:30px;display: flex;align-items: center;">
-                      <div class="col-lg-1">
-                        <i class="fa-brands fa-ethereum"></i>
-                      </div>
-                      <div class="col-lg-5">
-                       
-                        <h5>Ethereum</h5>
-                      </div>
-                      <div class="col-lg-5 float-right">
-                    
-                        <h5 id="Etherbal">0</h5>
-                      </div>
-                      <div class="col-lg-1">
-                        <i class="fa fa-ellipsis-v " aria-hidden="true"></i>
-                      </div>
-                    </div>
-                 </div>
-              </div>
             </li>
           </ul>
      </nav>

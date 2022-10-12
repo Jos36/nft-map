@@ -31,4 +31,10 @@ router.get("/profile", (req, res) => {
   res.sendFile(path.resolve(path.join(__dirname, "..", "/views/profile.html")));
 });
 
+router.get("/settings", (req, res) => {
+  res.sendFile(
+    path.resolve(path.join(__dirname, "..", "/views/settings.html"))
+  );
+});
+
 module.exports = router;
